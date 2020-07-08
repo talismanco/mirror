@@ -1,0 +1,26 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#286839",
+    "activityBar.activeBorder": "#32235c",
+    "activityBar.background": "#286839",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#32235c",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "statusBar.background": "#1a4325",
+    "statusBar.border": "#1a4325",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#286839",
+    "titleBar.activeBackground": "#1a4325",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.border": "#1a4325",
+    "titleBar.inactiveBackground": "#1a432599",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.remoteColor": "#1a4325",
+  "peacock.color": "#215732",
+  "go.lintTool": "golangci-lint",
+  "go.lintFlags": [
+    "--fast"
+  ]
+}

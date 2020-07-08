@@ -1,0 +1,26 @@
+{
+    "lunarispkgs": {
+        "branch": "master",
+        "description": " Nix Packages collection",
+        "homepage": "https://github.com/lunaris-studios/lunarispkgs",
+        "owner": "lunaris-studios",
+        "repo": "lunarispkgs",
+        "rev": "2cf3e8b11052cffdb26050f09ad6ebe29eb3ab34",
+        "sha256": "1symh05dib44n8q1gqzx3pkh7jqag5izd1q4ilw1r61z4s6xpijh",
+        "type": "tarball",
+        "url": "https://github.com/lunaris-studios/lunarispkgs/archive/2cf3e8b11052cffdb26050f09ad6ebe29eb3ab34.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs": {
+        "branch": "nixos-19.09",
+        "description": "A read-only mirror of NixOS/nixpkgs tracking the released channels. Send issues and PRs to",
+        "homepage": "https://github.com/NixOS/nixpkgs",
+        "owner": "NixOS",
+        "repo": "nixpkgs-channels",
+        "rev": "289466dd6a11c65a7de4a954d6ebf66c1ad07652",
+        "sha256": "0r5ja052s86fr54fm1zlhld3fwawz2w1d1gd6vbvpjrpjfyajibn",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs-channels/archive/289466dd6a11c65a7de4a954d6ebf66c1ad07652.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

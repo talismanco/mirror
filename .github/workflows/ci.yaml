@@ -1,0 +1,159 @@
+name: CI
+on:
+  push:
+    branches: [master, develop, alpha]
+  pull_request:
+    branches: [master, develop, alpha]
+
+jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        id: setup-1
+        uses: actions/checkout@v1
+
+      - name: Install Nix
+        id: setup-2
+        uses: cachix/install-nix-action@v10
+        with:
+          skip_adding_nixpkgs_channel: true
+
+      - name: Cachix
+        id: setup-3
+        uses: cachix/cachix-action@v6
+        with:
+          name: mirror
+          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Download Nix Dependenices
+        id: setup-4
+        run: |
+          nix-shell
+
+  test:
+    name: Test
+    needs: setup
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        id: test-1
+        uses: actions/checkout@v1
+
+      - name: Setup Go
+        id: test-2
+        uses: actions/setup-go@v2
+        with:
+          go-version: "1.14.4"
+
+      - name: Install Nix
+        id: test-3
+        uses: cachix/install-nix-action@v10         
+
+      - name: Cachix
+        id: test-4
+        uses: cachix/cachix-action@v6
+        with:
+          name: mirror
+          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Run tests
+        id: test-5
+        run: |
+          nix-shell --run "make test"
+
+      - name: Upload coverage to Codecov
+        id: test-6
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          # TODO (sam): change to true
+          fail_ci_if_error: false          
+
+      - name: Upload Test Artifacts
+        id: test-7
+        uses: actions/upload-artifact@v2
+        with:
+          name: test
+          path: ./target/test/**/*
+
+  build:
+    name: Build
+    needs: test
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        id: build-1
+        uses: actions/checkout@v1
+
+      - name: Setup Go
+        id: build-2
+        uses: actions/setup-go@v2
+        with:
+          go-version: "1.14.4"
+
+      - name: Install Nix
+        id: build-3
+        uses: cachix/install-nix-action@v10
+
+      - name: Cachix
+        id: build-4
+        uses: cachix/cachix-action@v6
+        with:
+          name: mirror
+          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Setup build environment
+        id: build-5
+        run: |
+          nix-shell --run "make setup-build"
+
+      - name: Cross-compile build
+        id: build-6
+        run: |
+          nix-shell --run "make build-cross"
+
+      - name: Upload build artifacts
+        id: build-7
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: ./target/dist/**/*
+
+  release:
+    name: Release
+    needs: build
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        id: build-1
+        uses: actions/checkout@v1
+
+      - name: Download build artifacts
+        id: build-2
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: ./target/dist
+
+      - name: Setup Node.js
+        id: build-3
+        uses: actions/setup-node@v2.1.0
+        with:
+          node-version: "10.19.0"
+
+      - name: Install Node.js dependencies
+        id: build-4
+        run: |
+          npm ci
+
+      - name: Release
+        id: build-5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm run release

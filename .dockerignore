@@ -1,0 +1,16 @@
+# dotenv
+.env
+.env.*
+.*.env
+
+# build
+target
+vendor
+
+# nix cache
+.direnv
+
+# IDE artifacts
+target
+.idea
+vendor
