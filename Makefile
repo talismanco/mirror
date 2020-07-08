@@ -53,6 +53,9 @@ PROJECT := $$PROJECT_NAME
 # Project version
 VERSION := $$PROJECT_VERSION
 
+# Project commit hash
+COMMIT := $(shell git rev-parse HEAD)
+
 # Project vendor
 VENDOR := $(NAME)-vendor
 
@@ -212,7 +215,7 @@ build:
 	GO111MODULE=on \
 	CGO_ENABLED=0 \
 		go build \
-		-ldflags '-extldflags "-fno-PIC $(STATIC_FLAG)" -w -s -X main.version=$(VERSION) -X main.release=$(RELEASE)' \
+		-ldflags '-extldflags "-fno-PIC $(STATIC_FLAG)" -w -s -X release.version=$(VERSION) -X release.commit=$(COMMIT)' \
 		-mod=readonly \
 		-v -o ./target/dist/bin/$(PROJECT) ./cmd/$(PROJECT) \
 		&& chmod +x ./target/dist/bin/$(PROJECT)
@@ -231,7 +234,7 @@ build-cross: setup-build
 		GOARCH=$(GOARCH) \
 		go build \
 		-tags $(STATIC_TAG) \
-		-ldflags '-s -extldflags $(STATIC_FLAG) -w -s -X main.version=$(VERSION) -X main.release=$(RELEASE)' \
+		-ldflags '-s -extldflags $(STATIC_FLAG) -w -s -X release.version=$(VERSION) -X release.commit=$(COMMIT)' \
 		-o ./target/dist/$(GOOS)/$(GOARCH)/$(PROJECT) ./cmd/$(PROJECT) \
 		|| echo $(TARGET) >> ./target/dist/ccfailures.txt ; \
 	)
