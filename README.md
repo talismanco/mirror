@@ -12,7 +12,7 @@
 
 </center>
 
------------------------------------------------------------------
+<!-- ----------------------------------------------------------------- -->
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@
   - [Create a mirror](#mirror-create)
   - [List of Mirrors](#mirror-list)
 
------------------------------------------------------------------
+<!-- ----------------------------------------------------------------- -->
 
 <a name="features"></a>
 # Features
@@ -36,7 +36,7 @@ constructs which are very easy to learn and powerful.
 the [license template](https://github.com/lunaris-studios/mirror-license) to see a simple, but very useful template for
 adding licenses to new projects with a single command.
 
------------------------------------------------------------------
+<!-- ----------------------------------------------------------------- -->
 
 <a name="installation"></a>
 # Installation
@@ -47,7 +47,7 @@ Binaries for Windows, Mac, and Linux are officially supported. You can download 
 
 Please see [Installation](https://github.com/lunaris-studios/mirror/wiki/Installation) page for more information.
 
------------------------------------------------------------------
+<!-- ----------------------------------------------------------------- -->
 
 <a name="getting-started"></a>
 # Getting Started
@@ -128,10 +128,9 @@ The user will be prompted as follows:
 
 For more information please take a look at [Usage](https://github.com/lunaris-studios/mirror/wiki/Usage) and [Creating Templates](https://github.com/lunaris-studios/mirror/wiki/Creating-Templates) pages in the wiki.
 
------------------------------------------------------------------
+<!-- ----------------------------------------------------------------- -->
 
 <a name="mirror-list"></a>
 ## List of Templates
 
 Take a look at the [Templates](https://github.com/lunaris-studios/mirror/wiki/Templates) page for an index of project templates, examples, and more information.
-

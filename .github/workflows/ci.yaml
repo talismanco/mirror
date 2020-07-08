@@ -70,7 +70,7 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          # TODO (sam): change to true
+          # TODO (sam): change after refactor
           fail_ci_if_error: false          
 
       - name: Upload Test Artifacts
