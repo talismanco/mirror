@@ -16,14 +16,6 @@
           "files": ["config/settings/global.json"],
           "from": "\"version\": \".*\"",
           "to": "\"version\": \"${nextRelease.version}\"",
-          "results": [
-            {
-              "file": "config/settings/global.json",
-              "hasChanged": true,
-              "numMatches": 1,
-              "numReplacements": 1
-            }
-          ],
           "countMatches": true
         }
       ]
