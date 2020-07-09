@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/lunaris-studios/mirror/compare/v1.0.1...v1.0.2) (2020-07-09)
+
+
+### Bug Fixes
+
+* updated version number in config ([d54e617](https://github.com/lunaris-studios/mirror/commit/d54e61721c1e8be19f02758bc865f9e6f683daab))
+
 ## [1.0.1](https://github.com/lunaris-studios/mirror/compare/v1.0.0...v1.0.1) (2020-07-08)
 
 
