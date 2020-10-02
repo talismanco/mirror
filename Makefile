@@ -255,7 +255,7 @@ build-docker:
 # === Release ===
 
 # This command should only ever be run in CI,
-# refrain from usin this locally.
+# refrain from using this locally.
 .PHONY: release
 release:
 	@npm run release
