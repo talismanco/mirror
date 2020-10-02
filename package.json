@@ -2,7 +2,10 @@
   "name": "mirror",
   "private": false,
   "scripts": {
-    "release": "semantic-release --ci"
+    "release": "semantic-release --ci",
+    "update": "run-s \"update:*\"",
+    "update:upgrade": "ncu --upgrade",
+    "update:install": "npm install"
   },
   "devDependencies": {
     "@google/semantic-release-replace-plugin": "^1.0.0",

@@ -27,12 +27,16 @@ help:
 	@echo "    make build-cross      : Cross-compile the application for several platforms"
 	@echo "    make build-docker     : Compile the application in Docker via Skaffold"
 	@echo ""
-	@echo "    make release          : Create a new release via `semantic-release`"
+	@echo "    make release          : Create a new release via 'semantic-release'"
 	@echo ""
 	@echo "    make clean            : Remove all project artifacts"
 	@echo "    make clean-build      : Remove all build artifacts"
 	@echo "    make clean-config     : Remove all configuration artifacts"
 	@echo "    make clean-deps       : Remove all dependency artifacts"
+	@echo ""
+	@echo  "   make update     : Update project dependencies"
+	@echo "    make update-nix : Update niv sources"
+	@echo "    make update-npm : Update npm dependencies"
 	@echo ""
 
 # Alias for help target
@@ -282,3 +286,22 @@ clean-config:
 .PHONY: clean-deps
 clean-deps:
 	@rm -rf ./vendor
+
+# === Update ===
+
+# Update all project dependencies
+.PHONY: update
+update:
+	@$(MAKE) -s update-niv
+	@$(MAKE) -s update-npm
+
+# Update niv dependencies
+.PHONY: update-niv
+update-niv:
+	@niv update
+
+# Update npm packages
+.PHONY: update-npm
+update-npm:
+	@npm run update
+
