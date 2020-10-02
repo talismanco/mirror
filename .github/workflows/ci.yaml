@@ -130,29 +130,29 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout
-        id: build-1
+        id: release-1
         uses: actions/checkout@v1
 
       - name: Download build artifacts
-        id: build-2
+        id: release-2
         uses: actions/download-artifact@v2
         with:
           name: build
           path: ./target/dist
 
       - name: Setup Node.js
-        id: build-3
+        id: release-3
         uses: actions/setup-node@v2.1.0
         with:
           node-version: "10.19.0"
 
       - name: Install Node.js dependencies
-        id: build-4
+        id: release-4
         run: |
           npm ci
 
       - name: Release
-        id: build-5
+        id: release-5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
