@@ -1,2 +1,0 @@
-- [ ] Add init script to create skeleton for mirror
-- [ ] Add contributing docs to wiki
