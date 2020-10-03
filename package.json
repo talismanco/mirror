@@ -11,6 +11,14 @@
     "@google/semantic-release-replace-plugin": "^1.0.1",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "npm-check-updates": "^9.0.3",
+    "npm-run-all": "^4.1.5",
     "semantic-release": "^17.1.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
