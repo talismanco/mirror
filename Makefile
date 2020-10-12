@@ -10,38 +10,40 @@
 .PHONY: help
 help:
 	@echo ""
-	@echo "$(PROJECT) Makefile."
+	@echo "Welcome to the '$(PROJECT)' Makefile."
 	@echo ""
 	@echo "The following commands are available:"
 	@echo ""
-	@echo "    make run              : Run the application"
+	@echo "    make run                   : Run the application"
+	@echo "    make run-build             : Run compiled local binary"
 	@echo ""
-	@echo "    make test             : Run all unit, QA, and static analysis reports"
-	@echo "    make test-unit        : Run unit tests"
+	@echo "    make test                  : Run all unit, QA, and static analysis reports"
+	@echo "    make test-unit             : Run unit tests"
 	@echo ""
-	@echo "    make deps             : Get all project dependencies"
-	@echo "    make deps-go          : Get all go dependencies"
-	@echo "    make deps-npm         : Get all npm dependencies"
+	@echo "    make deps                  : Get all project dependencies"
+	@echo "    make deps-go               : Get all go dependencies"
+	@echo "    make deps-npm              : Get all npm dependencies"
 	@echo ""
-	@echo "    make build            : Compile the application for the user's current platform"
-	@echo "    make build-cross      : Cross-compile the application for several platforms"
-	@echo "    make build-docker     : Compile the application in Docker via Skaffold"
+	@echo "    make build                 : Compile the application for the user's current platform"
+	@echo "    make build-cross           : Cross-compile the application for several platforms"
 	@echo ""
-	@echo "    make release          : Create a new release via 'semantic-release'"
+	@echo "    make docker-run          : Run the application in docker"
+	@echo "    make docker-build        : Compile the application in docker"
+	@echo "    make docker-build-cross  : Cross-compile the application for several platforms in docker"
 	@echo ""
-	@echo "    make clean            : Remove all project artifacts"
-	@echo "    make clean-build      : Remove all build artifacts"
-	@echo "    make clean-config     : Remove all configuration artifacts"
-	@echo "    make clean-deps       : Remove all dependency artifacts"
+	@echo "    make release               : Create a new release via 'semantic-release'"
 	@echo ""
-	@echo  "   make update     : Update project dependencies"
-	@echo "    make update-nix : Update niv sources"
-	@echo "    make update-npm : Update npm dependencies"
+	@echo "    make clean                 : Remove all project artifacts"
+	@echo "    make clean-build           : Remove all build artifacts"
+	@echo "    make clean-config          : Remove all configuration artifacts"
+	@echo "    make clean-deps            : Remove all dependency artifacts"
+	@echo ""
+	@echo "    make update                : Update project dependencies"
+	@echo "    make update-nix            : Update niv sources"
+	@echo "    make update-npm            : Update npm dependencies"
 	@echo ""
 
-# Alias for help target
 all: help
-	@$(MAKE) -s ".env.yaml"
 
 # === Entities ===
 
@@ -81,7 +83,7 @@ endif
 
 # === Shell Configuration ===
 
-SHELL := /bin/bash
+SHELL := $(shell which bash)
 
 UNAME_OS := $(shell uname -s | tr '[:upper:]' '[:lower:]')
 UNAME_ARCH := $(shell uname -m | tr '[:upper:]' '[:lower:]')
@@ -124,7 +126,7 @@ include .tool-versions.env
 
 include .env
 .PHONY: .env
-.env: .env.json .env.yaml
+.env: .env.json
 	@(python ./scripts/python/jsontoenv.py) < $< > $@
 
 .PHONY: .env.yaml
@@ -135,7 +137,11 @@ include .env
 
 .PHONY: run
 run:
-	go run ./cmd/mirror
+	go run ./cmd/$(PROJECT)
+
+.PHONY: run-build
+run-build:
+	./target/dist/bin/$(PROJECT)
 
 # === Testing ===
 
@@ -176,7 +182,16 @@ setup:
 
 .PHONY: setup-build
 setup-build:
-	@mkdir -p target/dist
+	@test -d ./target/dist || \
+		mkdir -p ./target/dist
+	@test -d ./target/dist/bin || \
+		mkdir -p ./target/dist/bin
+
+
+# Stub macro to call top-level config generators
+.PHONY: setup-config
+setup-config:
+	@exit
 
 .PHONY: setup-docs
 setup-docs:
@@ -213,8 +228,7 @@ deps-npm:
 
 # === Build ===
 
-# Compile the application per the user's instance
-.PHONY: build
+# Compile the application relative to the user's OS.
 build:
 	GO111MODULE=on \
 	CGO_ENABLED=0 \
@@ -247,10 +261,65 @@ ifneq ($(strip $(cat ./target/dist/ccfailures.txt)),)
 	exit 1
 endif
 
-# Compile the application in Docker via Skaffold
-.PHONY: build-docker
-build-docker:
-	skaffold build -p $(SKAFFOLD_FILENAME)
+# === Docker ===
+
+.PHONY: docker-run
+docker-run:
+	docker build \
+		--tag $(PROJECT) \
+		--build-arg COMMIT=$(COMMIT) \
+		--build-arg GOLANG_VERSION=$(GOLANG_VERSION) \
+		--build-arg OS=$(OS) \
+		--build-arg PROJECT=$(PROJECT) \
+		--build-arg STATIC_FLAG=$(STATIC_FLAG) \
+		.
+	docker run --interactive --rm --tty $(PROJECT)
+
+.PHONY: docker-build
+docker-build: setup-build
+	docker build \
+		--tag $(PROJECT) \
+		--build-arg COMMIT=$(COMMIT) \
+		--build-arg GOLANG_VERSION=$(GOLANG_VERSION) \
+		--build-arg OS=$(OS) \
+		--build-arg PROJECT=$(PROJECT) \
+		--build-arg STATIC_FLAG=$(STATIC_FLAG) \
+		.
+	# TODO (sam): replace w/ $(PROJECT) shim		
+	$(eval CONTAINER_ID := $(shell docker create mirror:latest))
+	docker cp $(CONTAINER_ID):/app/target/dist/bin/$(PROJECT) ./target/dist/bin/$(PROJECT)
+	docker rm --volumes $(CONTAINER_ID)
+
+# Cross-compile the application for several platforms in Docker
+.PHONY: docker-build-cross
+docker-build-cross: setup-build
+	@echo "" > target/dist/ccfailures.txt
+	$(foreach TARGET,$(CCTARGETS), \
+		$(eval GOOS = $(word 1,$(subst /, ,$(TARGET)))) \
+		$(eval GOARCH = $(word 2,$(subst /, ,$(TARGET)))) \
+		$(shell which mkdir) --parents ./target/dist/$(TARGET) && \
+		docker build \
+			--tag $(PROJECT) \
+			--build-arg ARCH=$(ARCH) \
+			--build-arg COMMIT=$(GOARCH) \
+			--build-arg GOLANG_VERSION=$(GOLANG_VERSION) \
+			--build-arg OS=$(GOOS) \
+			--build-arg PROJECT=$(PROJECT) \
+			--build-arg STATIC_FLAG=$(STATIC_FLAG) \
+			. && \
+		$(eval CONTAINER_ID := $(shell docker create mirror:latest)) \
+			echo $(CONTAINER_ID) && \
+			echo $(GOOS) && \
+			echo $(GOARCH) && \
+			echo $(PROJECT) && \
+			docker cp $(CONTAINER_ID):/app/target/dist/bin/$(PROJECT) ./target/dist/$(GOOS)/$(GOARCH) && \
+			docker rm --volumes $(CONTAINER_ID) \
+			|| echo $(TARGET) >> ./target/dist/ccfailures.txt ; \
+	)
+ifneq ($(strip $(cat ./target/dist/ccfailures.txt)),)
+	echo ./target/dist/ccfailures.txt
+	exit 1
+endif	
 
 # === Release ===
 
@@ -304,4 +373,3 @@ update-niv:
 .PHONY: update-npm
 update-npm:
 	@npm run update
-
