@@ -12,7 +12,6 @@ nixpkgs.mkShell rec {
     # <lunarispkgs>
     lunarispkgs.go_1_14_4
     lunarispkgs.golangci-lint_1_27_0
-    lunarispkgs.helm_3_2_1
     lunarispkgs.jq_1_6
     lunarispkgs.nodejs_12_18_3
     lunarispkgs.python_3_7_7
