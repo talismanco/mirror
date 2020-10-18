@@ -8,7 +8,7 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator", 
     ["@semantic-release/changelog", {
-      "changelogFile": "docs/CHANGELOG.md",
+      "changelogFile": "CHANGELOG.md",
     }],
     ["@google/semantic-release-replace-plugin", {
       "replacements": [
@@ -22,7 +22,7 @@
     }],
     ["@semantic-release/git", {
       "assets": [
-        "docs/CHANGELOG.md",
+        "CHANGELOG.md",
         "config/settings/global.json"
       ],
     }],
