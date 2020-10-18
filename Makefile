@@ -101,9 +101,6 @@ ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 CONFIG_DIR := $(ROOT_DIR)/config
 SETTINGS_DIR := $(CONFIG_DIR)/settings
 TARGET_DIR := $(ROOT_DIR)/target
-SKAFFOLD_DIR := $(CONFIG_DIR)/skaffold
-
-SKAFFOLD_FILENAME := $(SKAFFOLD_DIR)/$(STAGE).skaffold.yaml
 
 # Combine the active project stage configuration settings
 # with the included `global.json` configuartion settings.
