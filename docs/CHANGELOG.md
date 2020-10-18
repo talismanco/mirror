@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/lunaris-studios/mirror/compare/v1.1.0...v1.1.1) (2020-10-18)
+
+
+### Bug Fixes
+
+* add separate dockerfiles for build and run macros ([275babd](https://github.com/lunaris-studios/mirror/commit/275babdfa1262965df70a767511ea36d168cd728))
+
 # [1.1.0](https://github.com/lunaris-studios/mirror/compare/v1.0.2...v1.1.0) (2020-10-12)
 
 
