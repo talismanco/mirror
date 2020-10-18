@@ -266,6 +266,7 @@ endif
 .PHONY: docker-run
 docker-run:
 	docker build \
+		--file ./docker/run.dockerfile \
 		--tag $(PROJECT) \
 		--build-arg COMMIT=$(COMMIT) \
 		--build-arg GOLANG_VERSION=$(GOLANG_VERSION) \
@@ -277,7 +278,8 @@ docker-run:
 
 .PHONY: docker-build
 docker-build: setup-build
-	docker build \
+	@docker build \
+		--file ./docker/build.dockerfile \
 		--tag $(PROJECT) \
 		--build-arg COMMIT=$(COMMIT) \
 		--build-arg GOLANG_VERSION=$(GOLANG_VERSION) \
@@ -287,8 +289,8 @@ docker-build: setup-build
 		.
 	# TODO (sam): replace w/ $(PROJECT) shim		
 	$(eval CONTAINER_ID := $(shell docker create mirror:latest))
-	docker cp $(CONTAINER_ID):/app/target/dist/bin/$(PROJECT) ./target/dist/bin/$(PROJECT)
-	docker rm --volumes $(CONTAINER_ID)
+	@docker cp $(CONTAINER_ID):/app/target/dist/bin/$(PROJECT) ./target/dist/bin/$(PROJECT)
+	@docker rm --volumes $(CONTAINER_ID)
 
 # Cross-compile the application for several platforms in Docker
 .PHONY: docker-build-cross
@@ -299,6 +301,7 @@ docker-build-cross: setup-build
 		$(eval GOARCH = $(word 2,$(subst /, ,$(TARGET)))) \
 		$(shell which mkdir) --parents ./target/dist/$(TARGET) && \
 		docker build \
+			--file ./docker/build.dockerfile \
 			--tag $(PROJECT) \
 			--build-arg ARCH=$(ARCH) \
 			--build-arg COMMIT=$(GOARCH) \
@@ -308,10 +311,6 @@ docker-build-cross: setup-build
 			--build-arg STATIC_FLAG=$(STATIC_FLAG) \
 			. && \
 		$(eval CONTAINER_ID := $(shell docker create mirror:latest)) \
-			echo $(CONTAINER_ID) && \
-			echo $(GOOS) && \
-			echo $(GOARCH) && \
-			echo $(PROJECT) && \
 			docker cp $(CONTAINER_ID):/app/target/dist/bin/$(PROJECT) ./target/dist/$(GOOS)/$(GOARCH) && \
 			docker rm --volumes $(CONTAINER_ID) \
 			|| echo $(TARGET) >> ./target/dist/ccfailures.txt ; \
