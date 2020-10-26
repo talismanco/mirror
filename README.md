@@ -129,4 +129,3 @@ For more information please take a look at [Usage](https://github.com/lunaris-st
 ## List of Templates
 
 Take a look at the [Templates](https://github.com/lunaris-studios/mirror/wiki/Templates) page for an index of project templates, examples, and more information.
-
