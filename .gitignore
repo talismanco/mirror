@@ -7,15 +7,13 @@
 
 # dependencies
 node_modules
-
-# build
-target
 vendor
+
+# build artifacts
+target
 
 # nix cache
 .direnv
 
 # IDE artifacts
-target
 .idea
-vendor

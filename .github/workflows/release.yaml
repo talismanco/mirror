@@ -1,14 +1,13 @@
-name: CI
+name: Release
 on:
   push:
-    branches: [master, develop, alpha]
-  pull_request:
     branches: [master, develop, alpha]
 
 jobs:
   setup:
     name: Setup
     runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
         id: setup-1
@@ -37,6 +36,7 @@ jobs:
     name: Test
     needs: setup
     runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
         id: test-1
@@ -50,7 +50,7 @@ jobs:
 
       - name: Install Nix
         id: test-3
-        uses: cachix/install-nix-action@v10         
+        uses: cachix/install-nix-action@v10
 
       - name: Cachix
         id: test-4
@@ -71,7 +71,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           # TODO (sam): change after refactor
-          fail_ci_if_error: false          
+          fail_ci_if_error: false
 
       - name: Upload Test Artifacts
         id: test-7
@@ -84,6 +84,7 @@ jobs:
     name: Build
     needs: test
     runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
         id: build-1
@@ -128,6 +129,7 @@ jobs:
     name: Release
     needs: build
     runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
         id: release-1
@@ -157,3 +159,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run release
+
+        
