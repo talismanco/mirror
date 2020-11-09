@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/lunaris-studios/mirror/pkg/template"
+	"github.com/toyboxco/mirror/pkg/template"
 )
 
 func TestMarshalsTime(test *testing.T) {

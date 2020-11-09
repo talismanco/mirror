@@ -12,11 +12,11 @@ This Workflow defines a strict branching model designed around the project relea
 
 The foundation of this workflow is centered around [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/), which provides a standard for  what kind of branches to set up and how to merge them together. We will touch on the purposes of the branches below. The `git-flow` toolset is an actual command line tool that has an installation process. The installation process for `git-flow` is straightforward. Packages for `git-flow` are available on multiple operating systems. On OSX systems, you can execute brew install `git-flow`. On windows you will need to download and install `git-flow`. After installing `git-flow` you can use it in your project by executing `git flow init`. Git-flow is a wrapper around Git. The `git flow init` command is an extension of the default git init command and doesn't change anything in your repository other than creating branches for you.
 
-> If you're using [Casa](https://github.com/lunaris-studios/casa), `git-flow` will be available upon installation.
+> If you're using [Casa](https://github.com/toyboxco/casa), `git-flow` will be available upon installation.
 
 ## How it works
 
-![Git flow workflow - Historical Branches](https://storage.googleapis.com/lunaris-docs/git/workflow/branches.svg)
+![Git flow workflow - Historical Branches](https://storage.googleapis.com/toyboxco-docs/git/workflow/branches.svg)
 
 ### Develop and Master Branches
 
@@ -60,7 +60,7 @@ Similar to the `develop` branch, the alpha branch is integration branch for feat
 
 Each new feature should reside in its own branch, which can be pushed to the central repository for backup/collaboration. But, instead of branching off of `master`, feature branches use `develop` as their parent branch. When a feature is complete, it gets merged back into `develop`. Features should never interact directly with `master`.
 
-![Git flow workflow - Feature Branches](https://storage.googleapis.com/lunaris-docs/git/workflow/feature.svg)
+![Git flow workflow - Feature Branches](https://storage.googleapis.com/toyboxco-docs/git/workflow/feature.svg)
 
 Feature branches are generally created off to the latest `develop` branch.
 
@@ -99,7 +99,7 @@ git flow feature finish feature_branch
 
 ## Release Branches
 
-![Git flow workflow - Release Branches](https://storage.googleapis.com/lunaris-docs/git/workflow/release.svg)
+![Git flow workflow - Release Branches](https://storage.googleapis.com/toyboxco-docs/git/workflow/release.svg)
 
 Once `develop` has acquired enough features for a release (or a predetermined release date is approaching), you fork a release branch off of `develop`. Creating this branch starts the next release cycle, so no new features can be added after this point—only bug fixes, documentation generation, and other release-oriented tasks should go in this branch. Once it's ready to ship, the release branch gets merged into `master` and tagged with a version number. In addition, it should be merged back into `develop`, which may have progressed since the release was initiated.
 
@@ -142,7 +142,7 @@ Following a successful merge, The [CI Github Action](/github/workflows/release.y
 > Read our [maintenance outline](maintenance.md) for more information on project release and maintenance policy.
 
 ## Hotfix Branches
-![Git flow workflow - Hotfix Branches](https://storage.googleapis.com/lunaris-docs/git/workflow/feature.svg)
+![Git flow workflow - Hotfix Branches](https://storage.googleapis.com/toyboxco-docs/git/workflow/feature.svg)
 
 Maintenance or “hotfix” branches are used to quickly patch production releases. Hotfix branches are a lot like release branches and feature branches except they're based on `master` instead of `develop`. This is the only branch that should fork directly off of `master`. As soon as the fix is complete, it should be merged into both `master` and `develop` (or the current release branch), and `master` should be tagged with an updated version number.
 

@@ -1,6 +1,6 @@
 # `mirror` Development Docs
 
-Welcome to the [mirror](https://github.com/lunaris-studios/mirror), `development` documentation.
+Welcome to the [mirror](https://github.com/toyboxco/mirror), `development` documentation.
 
 | Topic                         | Description                                                                                                |
 | :---------------------------- | :--------------------------------------------------------------------------------------------------------- |

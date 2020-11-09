@@ -8,11 +8,11 @@ import (
 
 	cli "github.com/spf13/cobra"
 
-	"github.com/lunaris-studios/mirror/pkg/config"
-	"github.com/lunaris-studios/mirror/pkg/template"
-	"github.com/lunaris-studios/mirror/pkg/util/exit"
-	"github.com/lunaris-studios/mirror/pkg/util/tabular"
-	"github.com/lunaris-studios/mirror/pkg/util/validate"
+	"github.com/toyboxco/mirror/pkg/config"
+	"github.com/toyboxco/mirror/pkg/template"
+	"github.com/toyboxco/mirror/pkg/util/exit"
+	"github.com/toyboxco/mirror/pkg/util/tabular"
+	"github.com/toyboxco/mirror/pkg/util/validate"
 )
 
 // ListTemplates returns a list of templates saved in the local template registry.

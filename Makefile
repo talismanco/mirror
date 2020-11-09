@@ -1,7 +1,7 @@
 # MAKEFILE
 #
-# @author      Sam Craig <sam@lunaris.io>
-# @link        https://github.com/lunaris-studios/mirror
+# @author      Sam Craig <sam@toyboxco.io>
+# @link        https://github.com/toyboxco/mirror
 # ------------------------------------------------------------------------------
 
 .EXPORT_ALL_VARIABLES:

@@ -31,7 +31,7 @@ The following table describes the version types and their release cadence:
 
 ## Upgrade recommendations
 
-We encourage everyone to run the [latest stable release](https://github.com/lunaris-studios/mirror/releases) (the latest stable release is also reflected in the current state of the [master branch](https://github.com/lunaris-studios/mirror))
+We encourage everyone to run the [latest stable release](https://github.com/toyboxco/mirror/releases) (the latest stable release is also reflected in the current state of the [master branch](https://github.com/toyboxco/mirror))
 to ensure that you can easily upgrade to the most secure and feature-rich `mirror` experience.
 To make sure you can easily run the most recent stable release, we are working
 hard to keep the update process simple and reliable.

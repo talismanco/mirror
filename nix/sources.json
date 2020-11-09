@@ -1,14 +1,14 @@
 {
-    "lunarispkgs": {
+    "toyboxcopkgs": {
         "branch": "master",
         "description": " Nix Packages collection",
-        "homepage": "https://github.com/lunaris-studios/lunarispkgs",
-        "owner": "lunaris-studios",
-        "repo": "lunarispkgs",
+        "homepage": "https://github.com/toyboxco/toyboxcopkgs",
+        "owner": "toyboxco",
+        "repo": "toyboxcopkgs",
         "rev": "b7f19fac7c4d060f865f20b20081c26700cc69ec",
         "sha256": "0zx4xkyfm8gdzq7sb535nbymw4l9vp2l0jyh1nf3839m7bjmpsig",
         "type": "tarball",
-        "url": "https://github.com/lunaris-studios/lunarispkgs/archive/b7f19fac7c4d060f865f20b20081c26700cc69ec.tar.gz",
+        "url": "https://github.com/toyboxco/toyboxcopkgs/archive/b7f19fac7c4d060f865f20b20081c26700cc69ec.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {

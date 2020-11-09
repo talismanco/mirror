@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/lunaris-studios/mirror/pkg/util/tlog"
+	"github.com/toyboxco/mirror/pkg/util/tlog"
 )
 
 type templateFunc func() interface{}

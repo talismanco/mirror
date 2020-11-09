@@ -5,9 +5,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/lunaris-studios/mirror/pkg/config"
-	"github.com/lunaris-studios/mirror/pkg/util/exit"
-	"github.com/lunaris-studios/mirror/pkg/util/osutil"
+	"github.com/toyboxco/mirror/pkg/config"
+	"github.com/toyboxco/mirror/pkg/util/exit"
+	"github.com/toyboxco/mirror/pkg/util/osutil"
 	cli "github.com/spf13/cobra"
 )
 

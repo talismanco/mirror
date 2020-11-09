@@ -1,6 +1,6 @@
 # `mirror` Legal Docs
 
-Welcome to the [mirror](https://github.com/lunaris-studios/mirror), `legal` documentation.
+Welcome to the [mirror](https://github.com/toyboxco/mirror), `legal` documentation.
 
 | Topic                                                                                   | Description                                |
 | :-------------------------------------------------------------------------------------- | :----------------------------------------- |

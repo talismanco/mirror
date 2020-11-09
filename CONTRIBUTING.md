@@ -37,9 +37,9 @@ Please see our [Contributor Code of Conduct](./CODE_OF_CONDUCT.md) for informati
 
 * Issues with no clear steps to reproduce will not be triaged. If an issue is labeled with "needs: reply" and receives no further replies from the author of the issue for more than 14 days, it will be closed.
 
-* If you think you have found a bug, or have a new feature idea, please start by making sure it hasn't already been [reported](https://github.com/lunaris-studios/mirror/issues). You can search through existing issues to see if there is a similar one reported. Include closed issues as it may have been closed with a solution.
+* If you think you have found a bug, or have a new feature idea, please start by making sure it hasn't already been [reported](https://github.com/toyboxco/mirror/issues). You can search through existing issues to see if there is a similar one reported. Include closed issues as it may have been closed with a solution.
 
-* Next, [create a new issue](https://github.com/lunaris-studios/mirror/issues/new/choose) that thoroughly explains the problem. Please fill out the populated issue form before submitting the issue.
+* Next, [create a new issue](https://github.com/toyboxco/mirror/issues/new/choose) that thoroughly explains the problem. Please fill out the populated issue form before submitting the issue.
 
 <!-------------------------------------------------------------------->
 
@@ -76,12 +76,12 @@ Without a reliable code reproduction, it is unlikely we will be able to resolve 
 
 * We appreciate you taking the time to contribute! Before submitting a pull request, we ask that you please [create an issue](#creating-an-issue) that explains the bug or feature request and let us know that you plan on creating a pull request for it. If an issue already exists, please comment on that issue letting us know you would like to submit a pull request for it. This helps us to keep track of the pull request and make sure there isn't duplicated effort.
 
-* Looking for an issue to fix? Make sure to look through our issues with the [help wanted](https://github.com/lunaris-studios/mirror/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) label!
+* Looking for an issue to fix? Make sure to look through our issues with the [help wanted](https://github.com/toyboxco/mirror/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22) label!
 
 
 ### Setup
 
-1. [Install Mirror](https://github.com/lunaris-studios/mirror/blob/master/docs/development/installation.md) for latest stable version of the **Mirror CLI tool**.
+1. [Install Mirror](https://github.com/toyboxco/mirror/blob/master/docs/development/installation.md) for latest stable version of the **Mirror CLI tool**.
 2. Fork this repository.
 3. Clone your fork.
 4. Create a new branch from master for your change.
@@ -112,7 +112,7 @@ make run
 
 Run the compiled binary (this will produce a binary that matche your current OS):
 
-> If you're using [Casa](https://github.com/lunaris-studios/casa), the [**Mirror CLI tool**](https://github.com/lunaris-studios/mirror) will be available upon installation. So, make sure you overwrite the executable in your `PATH`, or call it directly via the macro below
+> If you're using [Casa](https://github.com/toyboxco/casa), the [**Mirror CLI tool**](https://github.com/toyboxco/mirror) will be available upon installation. So, make sure you overwrite the executable in your `PATH`, or call it directly via the macro below
 
 ```bash
 make build
@@ -127,7 +127,7 @@ make build-cross
 
 ### Submit Pull Request
 
-1. [Create a new pull request](https://github.com/lunaris-studios/mirror/compare) with the `develop` branch as the `base`. You may need to click on `compare across forks` to find your changes.
+1. [Create a new pull request](https://github.com/toyboxco/mirror/compare) with the `develop` branch as the `base`. You may need to click on `compare across forks` to find your changes.
 2. See the [Creating a pull request from a fork](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) GitHub help article for more information.
 3. Please fill out the provided Pull Request template to the best of your ability and include any issues that are related.
 

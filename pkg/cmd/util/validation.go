@@ -7,9 +7,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/lunaris-studios/mirror/pkg/template"
-	"github.com/lunaris-studios/mirror/pkg/util/osutil"
-	"github.com/lunaris-studios/mirror/pkg/util/validate"
+	"github.com/toyboxco/mirror/pkg/template"
+	"github.com/toyboxco/mirror/pkg/util/osutil"
+	"github.com/toyboxco/mirror/pkg/util/validate"
 )
 
 var (

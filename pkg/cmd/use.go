@@ -8,11 +8,11 @@ import (
 
 	cli "github.com/spf13/cobra"
 
-	"github.com/lunaris-studios/mirror/pkg/config"
-	"github.com/lunaris-studios/mirror/pkg/template"
-	"github.com/lunaris-studios/mirror/pkg/util/exit"
-	"github.com/lunaris-studios/mirror/pkg/util/osutil"
-	"github.com/lunaris-studios/mirror/pkg/util/validate"
+	"github.com/toyboxco/mirror/pkg/config"
+	"github.com/toyboxco/mirror/pkg/template"
+	"github.com/toyboxco/mirror/pkg/util/exit"
+	"github.com/toyboxco/mirror/pkg/util/osutil"
+	"github.com/toyboxco/mirror/pkg/util/validate"
 )
 
 // TemplateInRegistry checks whether the given name exists in the template registry.
