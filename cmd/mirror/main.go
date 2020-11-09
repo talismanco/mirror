@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/toyboxco/mirror/pkg/cmd"
-	"github.com/toyboxco/mirror/pkg/config"
-	"github.com/toyboxco/mirror/pkg/util/exit"
-	"github.com/toyboxco/mirror/pkg/util/osutil"
+	cmd "github.com/toyboxco/mirror/pkg/cmd"
+	config "github.com/toyboxco/mirror/pkg/config"
+	exit "github.com/toyboxco/mirror/pkg/util/exit"
+	osutil "github.com/toyboxco/mirror/pkg/util/osutil"
 
 	log "github.com/sirupsen/logrus"
 )
