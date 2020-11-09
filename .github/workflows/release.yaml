@@ -42,11 +42,11 @@ jobs:
         id: build-1
         uses: actions/checkout@v1
 
-      - name: Setup Go
-        id: build-2
-        uses: actions/setup-go@v2
-        with:
-          go-version: "1.14.4"
+      # - name: Setup Go
+      #   id: build-2
+      #   uses: actions/setup-go@v2
+      #   with:
+      #     go-version: "1.14.4"
 
       - name: Install Nix
         id: build-3
@@ -94,11 +94,11 @@ jobs:
           name: build
           path: ./target/dist
 
-      - name: Setup Node.js
-        id: release-3
-        uses: actions/setup-node@v2.1.0
-        with:
-          node-version: "10.19.0"
+      # - name: Setup Node.js
+      #   id: release-3
+      #   uses: actions/setup-node@v2.1.0
+      #   with:
+      #     node-version: "10.19.0"
 
       - name: Install Node.js dependencies
         id: release-4
