@@ -1,9 +1,9 @@
 {
-	"project": {
+    "project": {
     "owner": "Lunaris Studios, LLC",
-		"name": "mirror",
+    "name": "mirror",
     "organization": "lunaris-studios",
     "repository": "https://github.com/lunaris-studios/mirror",
     "version": "1.0.0"
-	}
+    }
 }
