@@ -1,6 +1,6 @@
 # MAKEFILE
 #
-# @author      Sam Craig <sam@lunaris.io>
+# @author      Sam Craig <sam@toybox.ooo>
 # @link        https://github.com/toyboxco/mirror
 # ------------------------------------------------------------------------------
 
