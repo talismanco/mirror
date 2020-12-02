@@ -57,12 +57,12 @@ jobs:
       - name: Setup build environment
         id: build-5
         run: |
-          nix-shell --pure --run "make setup-build" shell.release.nix
+          nix-shell --run "make setup-build" shell.release.nix
 
       - name: Cross-compile build
         id: build-6
         run: |
-          nix-shell --pure --run "make build-cross" shell.release.nix
+          nix-shell --run "make build-cross" shell.release.nix
 
       - name: Upload build artifacts
         id: build-7
