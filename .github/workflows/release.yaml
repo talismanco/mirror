@@ -92,13 +92,20 @@ jobs:
           name: toy-mirror-rel
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
-      - name: Install Node.js dependencies
+      - name: Download build artifacts
         id: release-4
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: ./target/dist          
+
+      - name: Install Node.js dependencies
+        id: release-5
         run: |
           nix-shell --run "npm ci" shell.release.nix
 
       - name: Release
-        id: release-5
+        id: release-6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
