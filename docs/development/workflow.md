@@ -1,7 +1,6 @@
-
 # Workflow
 
-We use a combination of three pillar fundementals when it comes to our git workflow:
+We use a combination of three pillar fundamentals when it comes to our git workflow:
 - [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)
 - [Conventional Commits](https://www.conventionalcommits.org)
 - [semantic-release](https://github.com/semantic-release/semantic-release)
@@ -16,29 +15,29 @@ The foundation of this workflow is centered around [Git Flow](https://nvie.com/p
 
 ## How it works
 
-![Git flow workflow - Historical Branches](https://storage.googleapis.com/toyboxco-docs/git/workflow/branches.svg)
+![Git flow workflow - Historical Branches](../../assets/git/workflow/branches.svg)
 
 ### Develop and Master Branches
 
-Instead of a single `master` branch, this workflow uses two branches to record the history of the project. The `master` branch stores the official release history, and the `develop` branch serves as an integration branch for features. It's also convenient to tag all commits in the `master` branch with a version number.
+Instead of a single `master` branch, this workflow uses two branches to record the history of the project. The `master` branch stores the official release history, and the `next` branch serves as an integration branch for features. It's also convenient to tag all commits in the `master` branch with a version number.
 
-The first step is to complement the default `master` with a `develop` branch. A simple way to do this is for one `develop`er to create an empty `develop` branch locally and push it to the server:
+The first step is to complement the default `master` with a `next` branch. A simple way to do this is for one developer to create an empty `next` branch locally and push it to the server:
 
 ```shell
-git branch develop
-git push -u origin develop
+git branch next
+git push -u origin next
 ```
 
-This branch will contain the complete history of the project, whereas `master` will contain an abridged version. Other `develop`ers should now clone the central repository and create a tracking branch for `develop`.
+This branch will contain the complete history of the project, whereas `master` will contain an abridged version. Other `next`ers should now clone the central repository and create a tracking branch for `next`.
 
-When using the `git-flow` extension library, executing `git flow init` on an existing repo will create the `develop` branch:
+When using the `git-flow` extension library, executing `git flow init` on an existing repo will create the `next` branch:
 
 ```shell;
 $ git flow init
 Initialized empty Git repository in ~/project/.git/
 No branches exist yet. Base branches must be created now.
 Branch name for production releases: [`master`]
-Branch name for "next release" development: [`develop`]
+Branch name for "next release" development: [`next`]
 
 How to name your supporting branch prefixes?
 Feature branches? [feature/]
@@ -48,28 +47,28 @@ Support branches? [support/]
 Version tag prefix? []
 
 $ git branch
-* `develop`
+* `next`
  `master`
 ```
 
 ### Alpha Branch
 
-Similar to the `develop` branch, the alpha branch is integration branch for features before they hit `develop`. The `alpha` branch is not a mandatory step, however. It exists as a sandbox to test volatile code that might not necessarily correspond to a release cycle.
+Similar to the `next` branch, the alpha branch is integration branch for features before they hit `next`. The `alpha` branch is not a mandatory step, however. It exists as a sandbox to test volatile code that might not necessarily correspond to a release cycle.
 
 ## Feature Branches
 
-Each new feature should reside in its own branch, which can be pushed to the central repository for backup/collaboration. But, instead of branching off of `master`, feature branches use `develop` as their parent branch. When a feature is complete, it gets merged back into `develop`. Features should never interact directly with `master`.
+Each new feature should reside in its own branch, which can be pushed to the central repository for backup/collaboration. But, instead of branching off of `master`, feature branches use `next` as their parent branch. When a feature is complete, it gets merged back into `next`. Features should never interact directly with `master`.
 
-![Git flow workflow - Feature Branches](https://storage.googleapis.com/toyboxco-docs/git/workflow/feature.svg)
+![Git flow workflow - Feature Branches](../../assets/git/workflow/feature.svg)
 
-Feature branches are generally created off to the latest `develop` branch.
+Feature branches are generally created off to the latest `next` branch.
 
 ### Creating a feature branch
 
 Without the git-flow extensions:
 
 ```shell
-git checkout develop
+git checkout next
 git checkout -b feature_branch
 ```
 When using the git-flow extension:
@@ -82,12 +81,12 @@ Continue your work and use Git like you normally would.
 
 ### Finishing a feature branch
 
-When you’re done with the development work on the feature, the next step is to merge the `feature_branch` into `develop`.
+When you’re done with the development work on the feature, the next step is to merge the `feature_branch` into `next`.
 
 Without the git-flow extensions:
 
 ```shell
-git checkout develop
+git checkout next
 git merge feature_branch
 ```
 
@@ -99,18 +98,18 @@ git flow feature finish feature_branch
 
 ## Release Branches
 
-![Git flow workflow - Release Branches](https://storage.googleapis.com/toyboxco-docs/git/workflow/release.svg)
+![Git flow workflow - Release Branches](../../assets/git/workflow/release.svg)
 
-Once `develop` has acquired enough features for a release (or a predetermined release date is approaching), you fork a release branch off of `develop`. Creating this branch starts the next release cycle, so no new features can be added after this point—only bug fixes, documentation generation, and other release-oriented tasks should go in this branch. Once it's ready to ship, the release branch gets merged into `master` and tagged with a version number. In addition, it should be merged back into `develop`, which may have progressed since the release was initiated.
+Once `next` has acquired enough features for a release (or a predetermined release date is approaching), you fork a release branch off of `next`. Creating this branch starts the next release cycle, so no new features can be added after this point—only bug fixes, documentation generation, and other release-oriented tasks should go in this branch. Once it's ready to ship, the release branch gets merged into `master` and tagged with a version number. In addition, it should be merged back into `next`, which may have progressed since the release was initiated.
 
 Using a dedicated branch to prepare releases makes it possible for one team to polish the current release while another team continues working on features for the next release. It also creates well-defined phases of development (e.g., it's easy to say, “This week we're preparing for version 4.0,” and to actually see it in the structure of the repository).
 
-Making release branches is another straightforward branching operation. Like feature branches, release branches are based on the `develop` branch. A new release branch can be created using the following methods.
+Making release branches is another straightforward branching operation. Like feature branches, release branches are based on the `next` branch. A new release branch can be created using the following methods.
 
 Without the git-flow extensions:
 
 ```shell
-git checkout develop
+git checkout next
 git checkout -b release/0.1.0
 ```
 
@@ -121,7 +120,7 @@ $ git flow release start 0.1.0
 Switched to a new branch 'release/0.1.0'
 ```
 
-Once the release is ready to ship, it will get merged it into `master` and `develop`, then the release branch will be deleted. It’s important to merge back into `develop` because critical updates may have been added to the release branch and they need to be accessible to new features. If your organization stresses code review, this would be an ideal place for a pull request.
+Once the release is ready to ship, it will get merged it into `master` and `next`, then the release branch will be deleted. It’s important to merge back into `next` because critical updates may have been added to the release branch and they need to be accessible to new features. If your organization stresses code review, this would be an ideal place for a pull request.
 
 To finish a release branch, use the following methods:
 
@@ -142,9 +141,9 @@ Following a successful merge, The [CI Github Action](/github/workflows/release.y
 > Read our [maintenance outline](maintenance.md) for more information on project release and maintenance policy.
 
 ## Hotfix Branches
-![Git flow workflow - Hotfix Branches](https://storage.googleapis.com/toyboxco-docs/git/workflow/feature.svg)
+![Git flow workflow - Hotfix Branches](../../assets/git/workflow/feature.svg)
 
-Maintenance or “hotfix” branches are used to quickly patch production releases. Hotfix branches are a lot like release branches and feature branches except they're based on `master` instead of `develop`. This is the only branch that should fork directly off of `master`. As soon as the fix is complete, it should be merged into both `master` and `develop` (or the current release branch), and `master` should be tagged with an updated version number.
+Maintenance or “hotfix” branches are used to quickly patch production releases. Hotfix branches are a lot like release branches and feature branches except they're based on `master` instead of `next`. This is the only branch that should fork directly off of `master`. As soon as the fix is complete, it should be merged into both `master` and `next` (or the current release branch), and `master` should be tagged with an updated version number.
 
 Having a dedicated line of development for bug fixes lets your team address issues without interrupting the rest of the workflow or waiting for the next release cycle. You can think of maintenance branches as ad hoc release branches that work directly with `master`. A hotfix branch can be created using the following methods:
 
@@ -161,12 +160,12 @@ When using the git-flow extensions:
 git flow hotfix start hotfix_branch
 ```
 
-Similar to finishing a release branch, a hotfix branch gets merged into both `master` and `develop`.
+Similar to finishing a release branch, a hotfix branch gets merged into both `master` and `next`.
 
 ```shell
 git checkout master
 git merge hotfix_branch
-git checkout develop
+git checkout next
 git merge hotfix_branch
 git branch -d hotfix_branch
 ```
@@ -183,14 +182,14 @@ Without the git-flow extensions:
 
 ```shell
 git checkout master
-git checkout -b develop
+git checkout -b next
 git checkout -b feature_branch
 # work happens on feature branch
-git checkout develop
+git checkout next
 git merge feature_branch
 git branch -d feature_branch
 # release cycle has ended, and we are ready to start a release
-git checkout develop
+git checkout next
 git checkout -b release/0.1.0
 # release is ready to ship
 git checkout master
@@ -219,7 +218,7 @@ Without the git-flow extensions:
 git checkout master
 git checkout -b hotfix_branch
 # work is done commits are added to the hotfix_branch
-git checkout develop
+git checkout next
 git merge hotfix_branch
 git checkout master
 git merge hotfix_branch
@@ -244,10 +243,10 @@ Some key takeaways to know about Gitflow are:
 
 The overall flow of Gitflow is:
 
-    A `develop` branch is created from `master`
-    A release branch is created from `develop`
-    Feature branches are created from `develop`
-    When a feature is complete it is merged into the `develop` branch
-    When the release branch is done it is merged into `develop` and `master`
+    A `next` branch is created from `master`
+    A release branch is created from `next`
+    Feature branches are created from `next`
+    When a feature is complete it is merged into the `next` branch
+    When the release branch is done it is merged into `next` and `master`
     If an issue in `master` is detected a hotfix branch is created from `master`
-    Once the hotfix is complete it is merged to both `develop` and `master`
+    Once the hotfix is complete it is merged to both `next` and `master`
