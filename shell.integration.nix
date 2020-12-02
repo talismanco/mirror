@@ -1,7 +1,7 @@
 { sources ? import ./nix {} }:
 let
   inherit (sources)
-    toyboxcopkgs
+    toyboxpkgs
     nixpkgs
   ;
 in
@@ -9,11 +9,11 @@ nixpkgs.mkShell rec {
   name = "toy-mirror-int";
   env = nixpkgs.buildEnv { name = name; paths = buildInputs; };
   buildInputs = [
-    # <toyboxcopkgs>
-    toyboxcopkgs.go_1_14_4
-    toyboxcopkgs.golangci-lint_1_27_0
-    toyboxcopkgs.jq_1_6
-    toyboxcopkgs.python_3_7_7
+    # <toyboxpkgs>
+    toyboxpkgs.go_1_14_4
+    toyboxpkgs.golangci-lint_1_27_0
+    toyboxpkgs.jq_1_6
+    toyboxpkgs.python_3_7_7
     # <nixpkgs>
     # ...
   ];

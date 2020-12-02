@@ -5,7 +5,7 @@ let
   };
 in
 rec {
-  toyboxcopkgs = import sources.toyboxcopkgs;
+  toyboxpkgs = import sources.toyboxpkgs;
   nixpkgs = import sources.nixpkgs {
     overlays = [ overlay ]; 
     config = {};

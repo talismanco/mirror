@@ -41,7 +41,7 @@
 
 # Installation
 
-> Our home management system, [Casa](https://github.com/toyboxco/casa), is shipped with the most recent version of `Mirror` via [toyboxcopkgs](https://github.com/toyboxco/toyboxcopkgs)
+> Our home management system, [Casa](https://github.com/toyboxco/casa), is shipped with the most recent version of `Mirror` via [toyboxpkgs](https://github.com/toyboxco/toyboxpkgs)
 
 Binaries for Windows, Mac, and Linux are officially supported. You can download them directly, from the release page, or run the installation script.
 
