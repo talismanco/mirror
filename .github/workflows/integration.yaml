@@ -1,8 +1,10 @@
 name: Integration
 on:
   pull_request:
-    branches: [master, develop, alpha]
-
+    branches:
+      - master
+      - next
+      - alpha
 jobs:
   setup:
     name: Setup
@@ -15,22 +17,21 @@ jobs:
 
       - name: Install Nix
         id: setup-2
-        uses: cachix/install-nix-action@v10
+        uses: cachix/install-nix-action@v12
         with:
           skip_adding_nixpkgs_channel: true
 
       - name: Cachix
         id: setup-3
-        uses: cachix/cachix-action@v6
+        uses: cachix/cachix-action@v7
         with:
-          name: mirror
-          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
+          name: toy-mirror-int
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Download Nix Dependenices
         id: setup-4
         run: |
-          nix-shell
+          nix-shell --pure shell.integration.nix
 
   test:
     name: Test
@@ -44,20 +45,19 @@ jobs:
 
       - name: Install Nix
         id: test-3
-        uses: cachix/install-nix-action@v10
+        uses: cachix/install-nix-action@v12
 
       - name: Cachix
         id: test-4
         uses: cachix/cachix-action@v6
         with:
-          name: mirror
-          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
+          name: toy-mirror-int
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Run tests
         id: test-5
         run: |
-          nix-shell --run "make test"
+          nix-shell --pure --run "make test" shell.integration.nix
 
       - name: Upload coverage to Codecov
         id: test-6

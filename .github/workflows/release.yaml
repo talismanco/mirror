@@ -1,8 +1,10 @@
 name: Release
 on:
   push:
-    branches: [master, develop, alpha]
-
+    branches:
+      - master
+      - next
+      - alpha
 jobs:
   setup:
     name: Setup
@@ -21,16 +23,15 @@ jobs:
 
       - name: Cachix
         id: setup-3
-        uses: cachix/cachix-action@v7
+        uses: cachix/cachix-action@v8
         with:
-          name: mirror
-          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
+          name: toy-mirror-rel
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Download Nix Dependenices
         id: setup-4
         run: |
-          nix-shell
+          nix-shell --pure shell.release.nix
 
   build:
     name: Build
@@ -42,12 +43,6 @@ jobs:
         id: build-1
         uses: actions/checkout@v1
 
-      # - name: Setup Go
-      #   id: build-2
-      #   uses: actions/setup-go@v2
-      #   with:
-      #     go-version: "1.14.4"
-
       - name: Install Nix
         id: build-3
         uses: cachix/install-nix-action@v12
@@ -56,19 +51,18 @@ jobs:
         id: build-4
         uses: cachix/cachix-action@v7
         with:
-          name: mirror
-          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
+          name: toy-mirror-rel
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Setup build environment
         id: build-5
         run: |
-          nix-shell --run "make setup-build"
+          nix-shell --pure --run "make setup-build" shell.release.nix
 
       - name: Cross-compile build
         id: build-6
         run: |
-          nix-shell --run "make build-cross"
+          nix-shell --pure --run "make build-cross" shell.release.nix
 
       - name: Upload build artifacts
         id: build-7
@@ -79,7 +73,7 @@ jobs:
 
   release:
     name: Release
-    needs: build
+    needs: setup
     runs-on: ubuntu-18.04
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
@@ -87,27 +81,26 @@ jobs:
         id: release-1
         uses: actions/checkout@v1
 
-      - name: Download build artifacts
+      - name: Install Nix
         id: release-2
-        uses: actions/download-artifact@v2
-        with:
-          name: build
-          path: ./target/dist
+        uses: cachix/install-nix-action@v12
 
-      # - name: Setup Node.js
-      #   id: release-3
-      #   uses: actions/setup-node@v2.1.0
-      #   with:
-      #     node-version: "10.19.0"
+      - name: Cachix
+        id: release-3
+        uses: cachix/cachix-action@v8
+        with:
+          name: toy-mirror-rel
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Install Node.js dependencies
         id: release-4
         run: |
-          npm ci
+          nix-shell --run "npm ci" shell.release.nix
 
       - name: Release
         id: release-5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm run release
+        run: |
+          nix-shell --run "npm run release" shell.release.nix
