@@ -3,10 +3,10 @@ package cmd
 import (
 	"fmt"
 
+	cli "github.com/spf13/cobra"
 	"github.com/toyboxco/mirror/pkg/config"
 	"github.com/toyboxco/mirror/pkg/util/exit"
 	"github.com/toyboxco/mirror/pkg/util/osutil"
-	cli "github.com/spf13/cobra"
 )
 
 // Init contains the cli-command for initializing the local template

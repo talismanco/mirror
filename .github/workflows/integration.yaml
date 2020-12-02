@@ -57,7 +57,7 @@ jobs:
       - name: Run tests
         id: test-5
         run: |
-          nix-shell --pure --run "make test" shell.integration.nix
+          nix-shell --run "make test" shell.integration.nix
 
       - name: Upload coverage to Codecov
         id: test-6
