@@ -1,16 +1,4 @@
 {
-    "toyboxcopkgs": {
-        "branch": "master",
-        "description": " Nix Packages collection",
-        "homepage": "https://github.com/toyboxco/toyboxcopkgs",
-        "owner": "toyboxco",
-        "repo": "toyboxcopkgs",
-        "rev": "b7f19fac7c4d060f865f20b20081c26700cc69ec",
-        "sha256": "0zx4xkyfm8gdzq7sb535nbymw4l9vp2l0jyh1nf3839m7bjmpsig",
-        "type": "tarball",
-        "url": "https://github.com/toyboxco/toyboxcopkgs/archive/b7f19fac7c4d060f865f20b20081c26700cc69ec.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "niv": {
         "branch": "master",
         "description": "Easy dependency management for Nix projects",
@@ -33,6 +21,18 @@
         "sha256": "0i3ybddi2mrlaz3di3svdpgy93zwmdglpywih4s9rd3wj865gzn1",
         "type": "tarball",
         "url": "https://github.com/NixOS/nixpkgs/archive/0cfe5377e8993052f9b0dd56d058f8008af45bd9.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "toyboxpkgs": {
+        "branch": "master",
+        "description": " Nix Packages collection",
+        "homepage": "https://github.com/toyboxco/toyboxpkgs",
+        "owner": "toyboxco",
+        "repo": "toyboxpkgs",
+        "rev": "576f761032415c21a8d97fe9e0a73a98ca73f987",
+        "sha256": "0zpz8bv26ys5cn9i4sj39h1lm1zwnaiv41hin9r6qpi32m3b0sxr",
+        "type": "tarball",
+        "url": "https://github.com/toyboxco/toyboxpkgs/archive/576f761032415c21a8d97fe9e0a73a98ca73f987.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
