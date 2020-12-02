@@ -73,7 +73,7 @@ jobs:
 
   release:
     name: Release
-    needs: setup
+    needs: build
     runs-on: ubuntu-18.04
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
