@@ -3,9 +3,9 @@ package cmd
 import (
 	"errors"
 
+	cli "github.com/spf13/cobra"
 	"github.com/toyboxco/mirror/pkg/util/exit"
 	"github.com/toyboxco/mirror/pkg/util/validate"
-	cli "github.com/spf13/cobra"
 )
 
 var (

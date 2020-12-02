@@ -5,10 +5,10 @@ import (
 	"os"
 	"path/filepath"
 
+	cli "github.com/spf13/cobra"
 	"github.com/toyboxco/mirror/pkg/config"
 	"github.com/toyboxco/mirror/pkg/util/exit"
 	"github.com/toyboxco/mirror/pkg/util/osutil"
-	cli "github.com/spf13/cobra"
 )
 
 func configureBashCompletion() error {
