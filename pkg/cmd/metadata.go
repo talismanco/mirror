@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/lunaris-studios/mirror/pkg/config"
-	"github.com/lunaris-studios/mirror/pkg/template"
+	"github.com/toyboxco/mirror/pkg/config"
+	"github.com/toyboxco/mirror/pkg/template"
 )
 
 func serializeMetadata(tag string, repo string, targetDir string) error {

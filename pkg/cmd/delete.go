@@ -7,10 +7,10 @@ import (
 
 	cli "github.com/spf13/cobra"
 
-	"github.com/lunaris-studios/mirror/pkg/config"
-	"github.com/lunaris-studios/mirror/pkg/util/osutil"
-	"github.com/lunaris-studios/mirror/pkg/util/tlog"
-	"github.com/lunaris-studios/mirror/pkg/util/validate"
+	"github.com/toyboxco/mirror/pkg/config"
+	"github.com/toyboxco/mirror/pkg/util/osutil"
+	"github.com/toyboxco/mirror/pkg/util/tlog"
+	"github.com/toyboxco/mirror/pkg/util/validate"
 )
 
 // Delete contains the cli-command for deleting templates.

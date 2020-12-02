@@ -1,9 +1,10 @@
 {
     "project": {
-    "owner": "Lunaris Studios, LLC",
-    "name": "mirror",
-    "organization": "lunaris-studios",
-    "repository": "https://github.com/lunaris-studios/mirror",
-    "version": "1.0.0"
+        "owner": "Toybox Labs, LLC.",
+        "name": "mirror",
+        "organization": "toyboxco",
+        "repository": "https://github.com/toyboxco/mirror",
+        "version": "1.0.0",
+        "nixpkgs_channel": "nixos-20.09"
     }
 }

@@ -3,7 +3,7 @@ package pattern_test
 import (
 	"testing"
 
-	"github.com/lunaris-studios/mirror/pkg/util/validate/pattern"
+	"github.com/toyboxco/mirror/pkg/util/validate/pattern"
 )
 
 func TestUnixPathPattern(t *testing.T) {
@@ -99,10 +99,10 @@ func TestURLPattern(t *testing.T) {
 		{" ", false},
 		{"/", false},
 		{"http://", false},
-		{"http://github.com/lunaris-studios/mirror", true},
-		{"https://github.com/lunaris-studios/mirror", true},
-		{"github.com/lunaris-studios/mirror", true},
-		{"rawcontent.github.com/lunaris-studios/mirror", true},
+		{"http://github.com/toyboxco/mirror", true},
+		{"https://github.com/toyboxco/mirror", true},
+		{"github.com/toyboxco/mirror", true},
+		{"rawcontent.github.com/toyboxco/mirror", true},
 		{"github.com:80/tmrts/mirror", true},
 	}
 

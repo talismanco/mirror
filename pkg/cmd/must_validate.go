@@ -3,10 +3,10 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/lunaris-studios/mirror/pkg/cmd/util"
-	"github.com/lunaris-studios/mirror/pkg/config"
-	"github.com/lunaris-studios/mirror/pkg/util/exit"
-	"github.com/lunaris-studios/mirror/pkg/util/validate"
+	"github.com/toyboxco/mirror/pkg/cmd/util"
+	"github.com/toyboxco/mirror/pkg/config"
+	"github.com/toyboxco/mirror/pkg/util/exit"
+	"github.com/toyboxco/mirror/pkg/util/validate"
 )
 
 // MustValidateVarArgs validates given variadic arguments with the supplied validation function.
