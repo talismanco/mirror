@@ -6,7 +6,7 @@ let
   ;
 in
 nixpkgs.mkShell rec {
-  name = "toy-mirror-int";
+  name = "integration.mirror";
   env = nixpkgs.buildEnv { name = name; paths = buildInputs; };
   buildInputs = [
     # <toyboxpkgs>
