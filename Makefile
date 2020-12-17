@@ -1,7 +1,7 @@
 # MAKEFILE
 #
-# @author      Sam Craig <sam@toybox.ooo>
-# @link        https://github.com/toyboxco/mirror
+# @author      Sam Craig <sam@talisman.ooo>
+# @link        https://github.com/talismanco/mirror
 # ------------------------------------------------------------------------------
 
 .EXPORT_ALL_VARIABLES:

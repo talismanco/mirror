@@ -3,10 +3,10 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/toyboxco/mirror/pkg/cmd/util"
-	"github.com/toyboxco/mirror/pkg/config"
-	"github.com/toyboxco/mirror/pkg/util/exit"
-	"github.com/toyboxco/mirror/pkg/util/validate"
+	"github.com/talismanco/mirror/pkg/cmd/util"
+	"github.com/talismanco/mirror/pkg/config"
+	"github.com/talismanco/mirror/pkg/util/exit"
+	"github.com/talismanco/mirror/pkg/util/validate"
 )
 
 // MustValidateVarArgs validates given variadic arguments with the supplied validation function.
