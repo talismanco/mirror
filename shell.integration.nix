@@ -14,6 +14,7 @@ nixpkgs.mkShell rec {
     talismanpkgs.golangci-lint_1_27_0
     talismanpkgs.python_3_7
     # <nixpkgs>
+    nxipkgs.direnv
     # ...
   ];
   shellHook = "unset GOPATH";
