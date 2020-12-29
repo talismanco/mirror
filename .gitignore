@@ -10,7 +10,8 @@ node_modules
 vendor
 
 # build artifacts
-target
+build/bin/*
+build/dist/*
 
 # nix cache
 .direnv

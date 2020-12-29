@@ -24,7 +24,7 @@ ARG ARCH=amd64
 # Project HEAD commit hash
 ARG COMMIT
 # Name of the directory to output compiled binaries, 
-# under the parent `./target/dist` directory.
+# under the parent `./build` directory.
 ARG DIST=bin
 # Desired operating system
 ARG OS=linux
@@ -36,7 +36,7 @@ ARG STATIC_FLAG=-static
 ARG VERSION
 
 # Absolute path to output compiled binaries.
-ARG BIN=target/dist/${DIST}
+ARG BIN=build/${DIST}
 
 # Create and change to the app directory.
 WORKDIR /app
@@ -69,13 +69,13 @@ RUN go build \
 FROM alpine:latest AS final
 
 # Name of the directory to output compiled binaries, 
-# under the parent `./target/dist` directory.
+# under the parent `./build` directory.
 ARG DIST=bin
 # Name of the project.
 ARG PROJECT=mirror
 
 # Absolute path to output compiled binaries.
-ARG BIN=target/dist/${DIST}
+ARG BIN=build/${DIST}
 
 # Copy the CA certificates to the production image from the certs-builder stage.
 COPY --from=certs-builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/

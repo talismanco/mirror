@@ -54,21 +54,27 @@ jobs:
           name: toy-mirror-int
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
-      - name: Run tests
+      - name: Setup Python Build Environment
         id: test-5
         run: |
-          nix-shell --run "make test" shell.integration.nix
+          nix-shell --run "direnv allow" shell.integration.nix
+          nix-shell --run "pip install -r requirements" shell.integration.nix
+
+      - name: Run tests
+        id: test-6
+        run: |
+          nix-shell --run "invoke test" shell.integration.nix
 
       - name: Upload coverage to Codecov
-        id: test-6
+        id: test-7
         uses: codecov/codecov-action@v1
         with:
           # TODO (sam): change after refactor
           fail_ci_if_error: false
 
       - name: Upload Test Artifacts
-        id: test-7
+        id: test-8
         uses: actions/upload-artifact@v2
         with:
           name: test
-          path: ./target/test/**/*
+          path: ./test/**/*

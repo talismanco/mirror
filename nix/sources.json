@@ -5,10 +5,10 @@
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
         "repo": "niv",
-        "rev": "29ddaaf4e099c3ac0647f5b652469dfc79cd3b53",
-        "sha256": "1va6myp07gkspgxfch8z3rs9nyvys6jmgzkys6a2c4j09qxp1bs0",
+        "rev": "ba57d5a29b4e0f2085917010380ef3ddc3cf380f",
+        "sha256": "1kpsvc53x821cmjg1khvp1nz7906gczq8mp83664cr15h94sh8i4",
         "type": "tarball",
-        "url": "https://github.com/nmattia/niv/archive/29ddaaf4e099c3ac0647f5b652469dfc79cd3b53.tar.gz",
+        "url": "https://github.com/nmattia/niv/archive/ba57d5a29b4e0f2085917010380ef3ddc3cf380f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
@@ -17,10 +17,10 @@
         "homepage": null,
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0cfe5377e8993052f9b0dd56d058f8008af45bd9",
-        "sha256": "0i3ybddi2mrlaz3di3svdpgy93zwmdglpywih4s9rd3wj865gzn1",
+        "rev": "b43faa27fac1f9a77454a69400ee9f54a9ac9447",
+        "sha256": "07r5na2frgw68x0aww7pskk44hgccavz7788mnhmllm5gl1j2206",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/0cfe5377e8993052f9b0dd56d058f8008af45bd9.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/b43faa27fac1f9a77454a69400ee9f54a9ac9447.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "talismanpkgs": {
@@ -29,10 +29,10 @@
         "homepage": "https://github.com/talismanco/talismanpkgs",
         "owner": "talismanco",
         "repo": "talismanpkgs",
-        "rev": "576f761032415c21a8d97fe9e0a73a98ca73f987",
-        "sha256": "0zpz8bv26ys5cn9i4sj39h1lm1zwnaiv41hin9r6qpi32m3b0sxr",
+        "rev": "a98610eab522738f6efde0be8ea72a740af34d80",
+        "sha256": "06n1s72qdsgl8rs2xv13dr5937l5fj65g4dy6r8d7w1g7ivjx55w",
         "type": "tarball",
-        "url": "https://github.com/talismanco/talismanpkgs/archive/576f761032415c21a8d97fe9e0a73a98ca73f987.tar.gz",
+        "url": "https://github.com/talismanco/talismanpkgs/archive/a98610eab522738f6efde0be8ea72a740af34d80.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

@@ -11,9 +11,8 @@ nixpkgs.mkShell rec {
   buildInputs = [
     # <talismanpkgs>
     talismanpkgs.go_1_14_4
-    talismanpkgs.jq_1_6
     talismanpkgs.nodejs_12_18_3
-    talismanpkgs.python_3_7_7
+    talismanpkgs.python_3_7
     # <nixpkgs>
     # ...
   ];

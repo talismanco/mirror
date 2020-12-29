@@ -12,8 +12,7 @@ nixpkgs.mkShell rec {
     # <talismanpkgs>
     talismanpkgs.go_1_14_4
     talismanpkgs.golangci-lint_1_27_0
-    talismanpkgs.jq_1_6
-    talismanpkgs.python_3_7_7
+    talismanpkgs.python_3_7
     # <nixpkgs>
     # ...
   ];
