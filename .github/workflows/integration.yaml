@@ -25,7 +25,7 @@ jobs:
         id: setup-3
         uses: cachix/cachix-action@v7
         with:
-          name: toy-mirror-int
+          name: tal-mirror-int
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Download Nix Dependenices
@@ -51,7 +51,7 @@ jobs:
         id: test-4
         uses: cachix/cachix-action@v6
         with:
-          name: toy-mirror-int
+          name: tal-mirror-int
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Setup Python Build Environment

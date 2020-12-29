@@ -25,7 +25,7 @@ jobs:
         id: setup-3
         uses: cachix/cachix-action@v8
         with:
-          name: toy-mirror-rel
+          name: tal-mirror-rel
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Download Nix Dependenices
@@ -51,7 +51,7 @@ jobs:
         id: build-4
         uses: cachix/cachix-action@v7
         with:
-          name: toy-mirror-rel
+          name: tal-mirror-rel
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Setup build environment
@@ -89,7 +89,7 @@ jobs:
         id: release-3
         uses: cachix/cachix-action@v8
         with:
-          name: toy-mirror-rel
+          name: tal-mirror-rel
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Download build artifacts
