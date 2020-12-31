@@ -35,7 +35,7 @@ jobs:
 
       - name: Test python execution
         run: |
-          nix-shell --run --pure "python --version"    
+          nix-shell --run --pure "python --version" shell.integration.nix
 
       - name: Setup direnv
         id: test-5
