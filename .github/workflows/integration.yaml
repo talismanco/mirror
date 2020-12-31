@@ -40,6 +40,10 @@ jobs:
       - name: Setup direnv
         id: test-5
         run: |
+          nix-shell --pure --run "direnv status" shell.integration.nix
+          nix-shell --pure --run "direnv reload" shell.integration.nix
+          nix-shell --pure --run "direnv status" shell.integration.nix
+          nix-shell --pure --run "eval '$(direnv hook bash)'" shell.integration.nix
           nix-shell --pure --run "direnv allow" shell.integration.nix
 
       - name: Run tests
