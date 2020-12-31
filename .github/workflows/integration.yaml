@@ -40,7 +40,7 @@ jobs:
       - name: Setup direnv
         id: test-5
         run: |
-          nix-shell --run --pure "direnv allow" shell.integration.nix
+          nix-shell --pure --run "direnv allow" shell.integration.nix
 
       - name: Run tests
         id: test-6
