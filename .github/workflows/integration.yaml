@@ -56,10 +56,14 @@ jobs:
           name: tal-mirror-int
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
+      - name: Test python execution
+        run: |
+          nix-shell --run --pure "python --version"    
+
       - name: Setup direnv
         id: test-4
         run: |
-          nix-shell --run "direnv allow" shell.integration.nix
+          nix-shell --run --pure "direnv allow" shell.integration.nix
 
       - name: Run tests
         id: test-5
