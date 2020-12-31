@@ -62,7 +62,7 @@ jobs:
       - name: Install Python modules
         id: test-6
         run: |
-          nix-shell --run "pip install -r requirements" shell.integration.nix
+          nix-shell --run "pip install -r requirements.txt" shell.integration.nix
 
       - name: Run tests
         id: test-7
