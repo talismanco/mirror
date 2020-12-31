@@ -33,18 +33,11 @@ jobs:
         run: |
           nix-shell --pure shell.integration.nix
 
-      - name: Test python execution
-        run: |
-          nix-shell --pure --run "python --version" shell.integration.nix
-
       - name: Setup direnv
         id: test-5
         run: |
-          nix-shell --pure --run "direnv status" shell.integration.nix
-          nix-shell --pure --run "direnv reload" shell.integration.nix
-          nix-shell --pure --run "direnv status" shell.integration.nix
-          nix-shell --pure --run "eval '$(direnv hook bash)'" shell.integration.nix
-          nix-shell --pure --run "direnv allow" shell.integration.nix
+          nix-shell --run "eval '$(direnv hook bash)'" shell.integration.nix
+          nix-shell --run "direnv allow" shell.integration.nix
 
       - name: Run tests
         id: test-6
