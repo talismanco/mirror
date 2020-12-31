@@ -7,7 +7,7 @@ on:
       - alpha
 jobs:
   test:
-    name: Setup
+    name: Test
     runs-on: ubuntu-18.04
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
@@ -35,7 +35,7 @@ jobs:
 
       - name: Test python execution
         run: |
-          nix-shell --run --pure "python --version" shell.integration.nix
+          nix-shell --pure --run "which python" shell.integration.nix
 
       - name: Setup direnv
         id: test-5
