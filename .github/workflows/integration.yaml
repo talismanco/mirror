@@ -61,25 +61,20 @@ jobs:
         run: |
           nix-shell --run "direnv allow" shell.integration.nix
 
-      - name: Install Python modules
-        id: test-5
-        run: |
-          nix-shell --run "pip install -r requirements.txt" shell.integration.nix
-
       - name: Run tests
-        id: test-6
+        id: test-5
         run: |
           nix-shell --run "invoke test" shell.integration.nix
 
       - name: Upload coverage to Codecov
-        id: test-8
+        id: test-6
         uses: codecov/codecov-action@v1
         with:
           # TODO (sam): change after refactor
           fail_ci_if_error: false
 
       - name: Upload Test Artifacts
-        id: test-9
+        id: test-7
         uses: actions/upload-artifact@v2
         with:
           name: test
