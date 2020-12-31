@@ -36,13 +36,12 @@ jobs:
       - name: Setup direnv
         id: test-5
         run: |
-          nix-shell --run "eval '$(direnv hook bash)'" shell.integration.nix
           nix-shell --run "direnv allow" shell.integration.nix
 
       - name: Run tests
         id: test-6
         run: |
-          nix-shell --run "invoke test" shell.integration.nix
+          nix-shell --run "direnv exec . invoke test" shell.integration.nix
 
       - name: Upload coverage to Codecov
         id: test-7
