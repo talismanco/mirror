@@ -44,28 +44,30 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Install Nix
-        id: test-3
+        id: test-2
         uses: cachix/install-nix-action@v12
+        with:
+          skip_adding_nixpkgs_channel: true
 
       - name: Cachix
-        id: test-4
+        id: test-3
         uses: cachix/cachix-action@v6
         with:
           name: tal-mirror-int
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Setup direnv
-        id: test-5
+        id: test-4
         run: |
           nix-shell --run "direnv allow" shell.integration.nix
 
       - name: Install Python modules
-        id: test-6
+        id: test-5
         run: |
           nix-shell --run "pip install -r requirements.txt" shell.integration.nix
 
       - name: Run tests
-        id: test-7
+        id: test-6
         run: |
           nix-shell --run "invoke test" shell.integration.nix
 
