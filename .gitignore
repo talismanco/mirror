@@ -12,6 +12,8 @@ vendor
 # build artifacts
 build/bin/*
 build/dist/*
+__pycache__/
+*.py[cod]
 
 # nix cache
 .direnv
