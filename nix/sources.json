@@ -17,10 +17,10 @@
         "homepage": null,
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e065200fc90175a8f6e50e76ef10a48786126e1c",
-        "sha256": "157ih9h1j9r4rf5ppv4yhin73k664bzclsy9c791crx9j5db0l7a",
+        "rev": "c5c6009fb436efe5732e07cd0e5692f495321752",
+        "sha256": "17h1dyi4alc3d7r6ivz9r76a3f7cxdwxw2kc3akhpgf5b00pnzv2",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/e065200fc90175a8f6e50e76ef10a48786126e1c.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/c5c6009fb436efe5732e07cd0e5692f495321752.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "talismanpkgs": {
@@ -29,10 +29,10 @@
         "homepage": "https://github.com/talismanco/talismanpkgs",
         "owner": "talismanco",
         "repo": "talismanpkgs",
-        "rev": "a98610eab522738f6efde0be8ea72a740af34d80",
-        "sha256": "06n1s72qdsgl8rs2xv13dr5937l5fj65g4dy6r8d7w1g7ivjx55w",
+        "rev": "0ba04368f4fd5dcc433aca8aa65e64c929525265",
+        "sha256": "0qzif413wddfrny0pzw4r5rp3rnmwlrc1a50b5ij185r0414c83l",
         "type": "tarball",
-        "url": "https://github.com/talismanco/talismanpkgs/archive/a98610eab522738f6efde0be8ea72a740af34d80.tar.gz",
+        "url": "https://github.com/talismanco/talismanpkgs/archive/0ba04368f4fd5dcc433aca8aa65e64c929525265.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
