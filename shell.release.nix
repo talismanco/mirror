@@ -14,7 +14,7 @@ nixpkgs.mkShell rec {
     talismanpkgs.nodejs_12_18_3
     talismanpkgs.python_3_7
     # <nixpkgs>
-    # ...
+    nixpkgs.direnv
   ];
   shellHook = "unset GOPATH";
 }

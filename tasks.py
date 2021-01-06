@@ -131,7 +131,7 @@ def build_cross(context, docker=False, static="static"):
     for system, arch in cctargets:
         # Establish the output directory for the current
         # build target.
-        targetdir = f'./buil`d/dist/{system}/{arch}'
+        targetdir = f'./build/dist/{system}/{arch}'
 
         # Create the `targetdir` if it doesn't exist.
         pathlib.Path(targetdir).mkdir(parents=True, exist_ok=True)
@@ -168,7 +168,7 @@ def build_cross(context, docker=False, static="static"):
 
             # Build the executable with the native `go build` command
             context.run(f'go build \
-                -ldflags \'-extldflags "-fno-PIC {static}" -w -s -X release.version={version} -X release.commit={commit}\'  \
+                -ldflags \'-extldflags "-fno-PIC {static}" -w -s -X release.version={version} -X release.commit={commit}\' \
                 -mod=readonly \
                 -v -o ./build/dist/{targetdir}/{project} ./cmd/{project}')
 
