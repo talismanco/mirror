@@ -107,7 +107,7 @@ jobs:
       - name: Install Node.js dependencies
         id: release-5
         run: |
-          nix-shell --run "npm ci" shell.release.nix
+          nix-shell --run "direnv exec . npm ci" shell.release.nix
 
       - name: Release
         id: release-6
@@ -115,4 +115,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          nix-shell --run "npm run release" shell.release.nix
+          nix-shell --run "direnv exec . npm run release" shell.release.nix
