@@ -105,7 +105,7 @@ jobs:
       - name: Setup direnv
         id: release-5
         run: |
-          nix-shell --run "direnv allow" shell.release.nix          
+          nix-shell --run "direnv allow" shell.release.nix
 
       - name: Install Node.js dependencies
         id: release-6
@@ -119,3 +119,21 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           nix-shell --run "direnv exec . npm run release" shell.release.nix
+
+  merge:
+    name: Merge
+    needs: release
+    runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]') && (contains(github.ref, 'master') || contains(github.ref, 'alpha'))"
+    steps:
+      - name: Checkout
+        id: merge-1
+        uses: actions/checkout@v1
+
+      - name: "Merge ${{ github.ref }} -> next"
+        id: merge-2
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          target_branch: next
+          github_token: ${{ github.token }}
