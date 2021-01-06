@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/toyboxco/mirror/pkg/cmd"
+	"github.com/talismanco/mirror/pkg/cmd"
 )
 
 func TestUseExecutesProjectTemplate(t *testing.T) {

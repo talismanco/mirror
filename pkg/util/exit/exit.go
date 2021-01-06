@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/toyboxco/mirror/pkg/util/tlog"
+	"github.com/talismanco/mirror/pkg/util/tlog"
 )
 
 const (

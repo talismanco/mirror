@@ -1,7 +1,7 @@
 # MAKEFILE
 #
-# @author      Sam Craig <sam@toybox.ooo>
-# @link        https://github.com/toyboxco/mirror
+# @author      Sam Craig <sam@talisman.ooo>
+# @link        https://github.com/talismanco/mirror
 # ------------------------------------------------------------------------------
 
 .EXPORT_ALL_VARIABLES:
@@ -152,11 +152,11 @@ test: setup-test
 .PHONY: test-unit
 test-unit:
 	@go test -tags ${STATIC_TAG} \
-	-covermode=atomic \
-	-bench=. \
-	-race \
-	-coverprofile=target/test/coverage.out \
-	-v ./...
+		-covermode=atomic \
+		-bench=. \
+		-race \
+		-coverprofile=target/test/coverage.out \
+		-v ./...
 
 .PHONY: test-golangci-lint
 test-golangci-lint:
@@ -166,7 +166,8 @@ test-golangci-lint:
 		--mem-profile-path ./target/test/mem-profile.out \
 		--cpu-profile-path ./target/test/cpu-profile.out \
 		--trace-path ./target/test/trace.out \
-		--fix | tee ./target/test/coverage.xml
+		--fix \
+		| tee ./target/test/coverage.xml
 
 # === Setup ===
 

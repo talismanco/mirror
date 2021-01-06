@@ -4,8 +4,8 @@ import (
 	"errors"
 
 	cli "github.com/spf13/cobra"
-	"github.com/toyboxco/mirror/pkg/util/exit"
-	"github.com/toyboxco/mirror/pkg/util/validate"
+	"github.com/talismanco/mirror/pkg/util/exit"
+	"github.com/talismanco/mirror/pkg/util/validate"
 )
 
 var (
