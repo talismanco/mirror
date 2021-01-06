@@ -53,6 +53,10 @@ jobs:
         run: |
           nix-shell --run "direnv allow" shell.release.nix
 
+      - name: Install Node.js dependencies
+        run: |
+          nix-shell --run "direnv exec . npm ci" shell.release.nix
+
       - name: Get next release version
         id: next-version
         run: |
