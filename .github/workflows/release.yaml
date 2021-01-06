@@ -104,13 +104,18 @@ jobs:
           name: build
           path: ./build/dist
 
-      - name: Install Node.js dependencies
+      - name: Setup direnv
         id: release-5
+        run: |
+          nix-shell --run "direnv allow" shell.release.nix          
+
+      - name: Install Node.js dependencies
+        id: release-6
         run: |
           nix-shell --run "direnv exec . npm ci" shell.release.nix
 
       - name: Release
-        id: release-6
+        id: release-7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
