@@ -2,7 +2,8 @@
   "name": "mirror",
   "private": false,
   "scripts": {
-    "release": "semantic-release --ci",
+    "release:ci": "semantic-release --ci",
+    "release:dry": "semantic-release --dry-run",
     "update": "run-s \"update:*\"",
     "update:upgrade": "ncu --upgrade",
     "update:install": "npm install"

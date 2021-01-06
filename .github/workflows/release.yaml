@@ -60,7 +60,7 @@ jobs:
       - name: Get next release version
         id: next-version
         run: |
-          echo "::set-output name=NEXT_VERSION::$(nix-shell --run "direnv exec . npm run release -- --dry-run | grep -oP 'Published release \K.*? '" shell.release.nix)"
+          echo "::set-output name=NEXT_VERSION::$(nix-shell --run "direnv exec . npm run release.dry | grep -oP 'Published release \K.*? '" shell.release.nix)"
 
   build:
     name: Build
@@ -135,7 +135,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          nix-shell --run "direnv exec . npm run release" shell.release.nix
+          nix-shell --run "direnv exec . npm run release.ci" shell.release.nix
 
   merge:
     name: Merge
