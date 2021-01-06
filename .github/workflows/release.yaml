@@ -54,7 +54,7 @@ jobs:
           nix-shell --run "direnv allow" shell.release.nix
 
       - name: Get next release version
-        id: pre-build.next-version
+        id: next-version
         run: |
           echo "::set-output name=NEXT_VERSION::$(nix-shell --run "direnv exec . npm run release -- --dry-run | grep -oP 'Published release \K.*? '" shell.release.nix)"
 
