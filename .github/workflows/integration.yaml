@@ -12,44 +12,40 @@ jobs:
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
-        id: test-1
         uses: actions/checkout@v1
 
       - name: Install Nix
-        id: test-2
         uses: cachix/install-nix-action@v12
 
       - name: Cachix
-        id: test-3
         uses: cachix/cachix-action@v7
         with:
           name: tal-mirror-int
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Download Nix Dependenices
-        id: test-4
         run: |
           nix-shell --pure shell.integration.nix
 
       - name: Setup direnv
-        id: test-5
         run: |
           nix-shell --run "direnv allow" shell.integration.nix
 
+      - name: Install build dependencies
+        run: |
+          nix-shell --run "direnv exec . invoke init" shell.integration.nix
+
       - name: Run tests
-        id: test-6
         run: |
           nix-shell --run "direnv exec . invoke test" shell.integration.nix
 
       - name: Upload coverage to Codecov
-        id: test-7
         uses: codecov/codecov-action@v1
         with:
           # TODO (sam): change after refactor
           fail_ci_if_error: false
 
       - name: Upload Test Artifacts
-        id: test-8
         uses: actions/upload-artifact@v2
         with:
           name: test

@@ -89,6 +89,10 @@ jobs:
         run: |
           nix-shell --run "direnv allow" shell.release.nix
 
+      - name: Install build dependencies
+        run: |
+          nix-shell --run "direnv exec . invoke init" shell.release.nix
+
       - name: Cross-compile build
         run: |
           nix-shell --run "direnv exec . invoke build.cross" shell.release.nix
