@@ -12,63 +12,83 @@ jobs:
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
-        id: setup-1
         uses: actions/checkout@v1
 
       - name: Install Nix
-        id: setup-2
         uses: cachix/install-nix-action@v12
 
       - name: Cachix
-        id: setup-3
         uses: cachix/cachix-action@v8
         with:
           name: tal-mirror-rel
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Download Nix Dependenices
-        id: setup-4
         run: |
           nix-shell --pure shell.release.nix
 
-  build:
+  pre-build:
     name: Build
     needs: setup
     runs-on: ubuntu-18.04
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
-        id: build-1
         uses: actions/checkout@v1
 
       - name: Install Nix
-        id: build-2
         uses: cachix/install-nix-action@v12
 
       - name: Cachix
-        id: build-3
         uses: cachix/cachix-action@v8
         with:
           name: tal-mirror-rel
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Download Nix Dependenices
-        id: build-4
         run: |
           nix-shell --pure shell.release.nix
 
       - name: Setup direnv
-        id: build-5
+        run: |
+          nix-shell --run "direnv allow" shell.release.nix
+
+      - name: Get next release version
+        id: pre-build.next-version
+        run: |
+          echo "::set-output name=NEXT_VERSION::$(nix-shell --run "direnv exec . npm run release -- --dry-run | grep -oP 'Published release \K.*? '" shell.release.nix)"
+
+  build:
+    name: Build
+    needs: setup
+    runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]') && jobs.pre-build.steps.next-version.outputs.NEXT_VERSION"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v12
+
+      - name: Cachix
+        uses: cachix/cachix-action@v8
+        with:
+          name: tal-mirror-rel
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Download Nix Dependenices
+        run: |
+          nix-shell --pure shell.release.nix
+
+      - name: Setup direnv
         run: |
           nix-shell --run "direnv allow" shell.release.nix
 
       - name: Cross-compile build
-        id: build-6
         run: |
           nix-shell --run "direnv exec . invoke build.cross" shell.release.nix
 
       - name: Upload build artifacts
-        id: build-7
         uses: actions/upload-artifact@v2
         with:
           name: build
@@ -81,39 +101,32 @@ jobs:
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
-        id: release-1
         uses: actions/checkout@v1
 
       - name: Install Nix
-        id: release-2
         uses: cachix/install-nix-action@v12
 
       - name: Cachix
-        id: release-3
         uses: cachix/cachix-action@v8
         with:
           name: tal-mirror-rel
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Download build artifacts
-        id: release-4
         uses: actions/download-artifact@v2
         with:
           name: build
           path: ./build/dist
 
       - name: Setup direnv
-        id: release-5
         run: |
           nix-shell --run "direnv allow" shell.release.nix
 
       - name: Install Node.js dependencies
-        id: release-6
         run: |
           nix-shell --run "direnv exec . npm ci" shell.release.nix
 
       - name: Release
-        id: release-7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -127,11 +140,9 @@ jobs:
     if: "!contains(github.event.commits[0].message, '[skip ci]') && (contains(github.ref, 'master') || contains(github.ref, 'alpha'))"
     steps:
       - name: Checkout
-        id: merge-1
         uses: actions/checkout@v1
 
       - name: "Merge ${{ github.ref }} -> next"
-        id: merge-2
         uses: devmasx/merge-branch@v1.3.1
         with:
           type: now
