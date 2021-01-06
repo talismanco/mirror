@@ -60,6 +60,8 @@ jobs:
       - name: Get next release version
         id: next-version
         run: |
+          npm version
+          node --version
           nix-shell --run "direnv exec . npm run release:dry | grep -oP 'Published release \K.*? '" shell.release.nix
           echo "::set-output name=NEXT_VERSION::$NEXT_VERSION"
 
@@ -92,7 +94,6 @@ jobs:
       - name: Install Python build dependencies
         run: |
           nix-shell --run "direnv exec . pip install -r requirements.txt" shell.release.nix
-
 
       - name: Cross-compile build
         run: |
