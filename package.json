@@ -3,7 +3,7 @@
   "private": false,
   "scripts": {
     "release:ci": "semantic-release --ci",
-    "release:dry": "semantic-release --ci --dry-run",
+    "release:dry": "semantic-release --dry-run --debug",
     "update": "run-s \"update:*\"",
     "update:upgrade": "ncu --upgrade",
     "update:install": "npm install"
