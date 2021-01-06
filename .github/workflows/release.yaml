@@ -74,7 +74,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build
-          path: ./target/dist/**/*
+          path: ./build/dist/**/*
 
   release:
     name: Release
@@ -102,7 +102,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: build
-          path: ./target/dist
+          path: ./build/dist
 
       - name: Install Node.js dependencies
         id: release-5
