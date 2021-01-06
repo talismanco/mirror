@@ -49,13 +49,9 @@ jobs:
         run: |
           nix-shell --pure shell.release.nix
 
-      - name: Setup direnv
-        run: |
-          nix-shell --run "direnv allow" shell.release.nix
-
       - name: Install Node.js dependencies
         run: |
-          nix-shell --run "direnv exec . npm ci" shell.release.nix
+          nix-shell --run "npm ci" shell.release.nix
 
       - name: Get next release version
         id: next-version
@@ -127,20 +123,16 @@ jobs:
           name: build
           path: ./build/dist
 
-      - name: Setup direnv
-        run: |
-          nix-shell --run "direnv allow" shell.release.nix
-
       - name: Install Node.js dependencies
         run: |
-          nix-shell --run "direnv exec . npm ci" shell.release.nix
+          nix-shell --run "npm ci" shell.release.nix
 
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          nix-shell --run "direnv exec . npm run release:ci" shell.release.nix
+          nix-shell --run "npm run release:ci" shell.release.nix
 
   merge:
     name: Merge
