@@ -89,9 +89,10 @@ jobs:
         run: |
           nix-shell --run "direnv allow" shell.release.nix
 
-      - name: Install build dependencies
+      - name: Install Python build dependencies
         run: |
-          nix-shell --run "direnv exec . invoke init" shell.release.nix
+          nix-shell --run "direnv exec . pip install -r requirements.txt" shell.release.nix
+
 
       - name: Cross-compile build
         run: |

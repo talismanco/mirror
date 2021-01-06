@@ -31,9 +31,9 @@ jobs:
         run: |
           nix-shell --run "direnv allow" shell.integration.nix
 
-      - name: Install build dependencies
+      - name: Install Python build dependencies
         run: |
-          nix-shell --run "direnv exec . invoke init" shell.integration.nix
+          nix-shell --run "direnv exec . pip install -r requirements.txt" shell.integration.nix
 
       - name: Run tests
         run: |
