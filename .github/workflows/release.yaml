@@ -28,7 +28,7 @@ jobs:
           nix-shell --pure shell.release.nix
 
   pre-build:
-    name: Build
+    name: Pre-build
     needs: setup
     runs-on: ubuntu-18.04
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
@@ -60,9 +60,9 @@ jobs:
 
   build:
     name: Build
-    needs: setup
+    needs: pre-build
     runs-on: ubuntu-18.04
-    if: "!contains(github.event.commits[0].message, '[skip ci]') && jobs.pre-build.steps.next-version.outputs.NEXT_VERSION"
+    if: "!contains(github.event.commits[0].message, '[skip ci]') && github.jobs.pre-build.steps.next-version.outputs.NEXT_VERSION"
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -135,7 +135,6 @@ jobs:
 
   merge:
     name: Merge
-    needs: release
     runs-on: ubuntu-18.04
     if: "!contains(github.event.commits[0].message, '[skip ci]') && (contains(github.ref, 'master') || contains(github.ref, 'alpha'))"
     steps:
