@@ -60,13 +60,7 @@ jobs:
       - name: Get next release version
         id: next-version
         run: |
-          node --version
-          nix-shell --run "node --version"
-          nix-shell --pure --run "node --version"
-          nix-shell --run "direnv exec . node --version"
-          nix-shell --pure --run "direnv exec . node --version"
-          
-          nix-shell --run "direnv exec . npm run release:dry | grep -oP 'Published release \K.*? '" shell.release.nix
+          nix-shell --run "npm run release:dry | grep -oP 'Published release \K.*? '" shell.release.nix
           echo "::set-output name=NEXT_VERSION::$NEXT_VERSION"
 
   build:
