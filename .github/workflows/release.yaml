@@ -70,7 +70,7 @@ jobs:
     if: "!contains(github.event.commits[0].message, '[skip ci]') && !contains(needs.pre-build.outputs.next-version, '[no release]')"
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        # uses: actions/checkout@v2
         run: |
           echo ${{ needs.pre-build.outputs.next-version }}
 
