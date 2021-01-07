@@ -1,21 +1,20 @@
 { sources ? import ./nix {} }:
 let
   inherit (sources)
-    toyboxpkgs
+    talismanpkgs
     nixpkgs
   ;
 in
 nixpkgs.mkShell rec {
-  name = "toy-mirror-rel";
+  name = "release.mirror";
   env = nixpkgs.buildEnv { name = name; paths = buildInputs; };
   buildInputs = [
-    # <toyboxpkgs>
-    toyboxpkgs.go_1_14_4
-    toyboxpkgs.jq_1_6
-    toyboxpkgs.nodejs_12_18_3
-    toyboxpkgs.python_3_7_7
+    # <talismanpkgs>
+    talismanpkgs.go_1_14_13
+    talismanpkgs.nodejs_12_18_3
+    talismanpkgs.python_3_7
     # <nixpkgs>
-    # ...
+    nixpkgs.direnv
   ];
   shellHook = "unset GOPATH";
 }

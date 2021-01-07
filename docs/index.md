@@ -1,6 +1,6 @@
 # `mirror` Docs
 
-Welcome to the [mirror](https://github.com/toyboxco/mirror) documentation.
+Welcome to the [mirror](https://github.com/talismanco/mirror) documentation.
 
 ## Contributing to `mirror`
 

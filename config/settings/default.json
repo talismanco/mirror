@@ -2,9 +2,9 @@
     "project": {
         "owner": "Toybox Labs, LLC.",
         "name": "mirror",
-        "organization": "toyboxco",
-        "repository": "https://github.com/toyboxco/mirror",
-        "version": "1.0.0",
+        "organization": "talismanco",
+        "repository": "https://github.com/talismanco/mirror",
+        "version": "1.0.1",
         "nixpkgs_channel": "nixos-20.09"
     }
 }

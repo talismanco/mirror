@@ -7,9 +7,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/toyboxco/mirror/pkg/template"
-	"github.com/toyboxco/mirror/pkg/util/osutil"
-	"github.com/toyboxco/mirror/pkg/util/validate"
+	"github.com/talismanco/mirror/pkg/template"
+	"github.com/talismanco/mirror/pkg/util/osutil"
+	"github.com/talismanco/mirror/pkg/util/validate"
 )
 
 var (

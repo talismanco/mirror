@@ -11,7 +11,7 @@ This Workflow defines a strict branching model designed around the project relea
 
 The foundation of this workflow is centered around [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/), which provides a standard for  what kind of branches to set up and how to merge them together. We will touch on the purposes of the branches below. The `git-flow` toolset is an actual command line tool that has an installation process. The installation process for `git-flow` is straightforward. Packages for `git-flow` are available on multiple operating systems. On OSX systems, you can execute brew install `git-flow`. On windows you will need to download and install `git-flow`. After installing `git-flow` you can use it in your project by executing `git flow init`. Git-flow is a wrapper around Git. The `git flow init` command is an extension of the default git init command and doesn't change anything in your repository other than creating branches for you.
 
-> If you're using [Casa](https://github.com/toyboxco/casa), `git-flow` will be available upon installation.
+> If you're using [Casa](https://github.com/talismanco/casa), `git-flow` will be available upon installation.
 
 ## How it works
 

@@ -12,64 +12,98 @@ jobs:
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
-        id: setup-1
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Install Nix
-        id: setup-2
         uses: cachix/install-nix-action@v12
-        with:
-          skip_adding_nixpkgs_channel: true
 
       - name: Cachix
-        id: setup-3
         uses: cachix/cachix-action@v8
         with:
-          name: toy-mirror-rel
+          name: tal-mirror-rel
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Download Nix Dependenices
-        id: setup-4
         run: |
           nix-shell --pure shell.release.nix
 
-  build:
-    name: Build
+  pre-build:
+    name: Pre-build
     needs: setup
     runs-on: ubuntu-18.04
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
+    outputs:
+      next-version: ${{ steps.next-version.outputs.next-version }}
     steps:
       - name: Checkout
-        id: build-1
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Install Nix
-        id: build-3
         uses: cachix/install-nix-action@v12
 
       - name: Cachix
-        id: build-4
-        uses: cachix/cachix-action@v7
+        uses: cachix/cachix-action@v8
         with:
-          name: toy-mirror-rel
+          name: tal-mirror-rel
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
-      - name: Setup build environment
-        id: build-5
+      - name: Download Nix Dependenices
         run: |
-          nix-shell --run "make setup-build" shell.release.nix
+          nix-shell --pure shell.release.nix
+
+      - name: Install Node.js dependencies
+        run: |
+          nix-shell --run "npm ci" shell.release.nix
+
+      - name: Get next release version
+        id: next-version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NEXT_VERSION=$(nix-shell --run "npm run release:dry | grep -oP 'Published release \K.*? ' || echo '[no release]'" shell.release.nix)
+          echo "::set-output name=next-version::$NEXT_VERSION"
+
+  build:
+    name: Build
+    needs: pre-build
+    runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]') && needs.pre-build.outputs.next-version != '[no release]'"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v12
+
+      - name: Cachix
+        uses: cachix/cachix-action@v8
+        with:
+          name: tal-mirror-rel
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Download Nix Dependenices
+        run: |
+          nix-shell --pure shell.release.nix
+
+      - name: Setup direnv
+        run: |
+          nix-shell --run "direnv allow" shell.release.nix
+
+      - name: Install Python build dependencies
+        run: |
+          nix-shell --run "direnv exec . pip install -r requirements.txt" shell.release.nix
 
       - name: Cross-compile build
-        id: build-6
         run: |
-          nix-shell --run "make build-cross" shell.release.nix
+          nix-shell --run "direnv exec . invoke build.cross" shell.release.nix
 
       - name: Upload build artifacts
-        id: build-7
         uses: actions/upload-artifact@v2
         with:
           name: build
-          path: ./target/dist/**/*
+          path: ./build/dist/**/*
 
   release:
     name: Release
@@ -78,36 +112,46 @@ jobs:
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
-        id: release-1
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Install Nix
-        id: release-2
         uses: cachix/install-nix-action@v12
 
       - name: Cachix
-        id: release-3
         uses: cachix/cachix-action@v8
         with:
-          name: toy-mirror-rel
+          name: tal-mirror-rel
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Download build artifacts
-        id: release-4
         uses: actions/download-artifact@v2
         with:
           name: build
-          path: ./target/dist          
+          path: ./build/dist
 
       - name: Install Node.js dependencies
-        id: release-5
         run: |
           nix-shell --run "npm ci" shell.release.nix
 
       - name: Release
-        id: release-6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          nix-shell --run "npm run release" shell.release.nix
+          nix-shell --run "npm run release:ci" shell.release.nix
+
+  merge:
+    name: Merge
+    runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]') && (contains(github.ref, 'master') || contains(github.ref, 'alpha'))"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Merge ${{ github.ref }} -> next"
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          target_branch: next
+          github_token: ${{ github.token }}

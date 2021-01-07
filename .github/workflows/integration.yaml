@@ -6,69 +6,47 @@ on:
       - next
       - alpha
 jobs:
-  setup:
-    name: Setup
+  test:
+    name: Test
     runs-on: ubuntu-18.04
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
     steps:
       - name: Checkout
-        id: setup-1
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Install Nix
-        id: setup-2
         uses: cachix/install-nix-action@v12
-        with:
-          skip_adding_nixpkgs_channel: true
 
       - name: Cachix
-        id: setup-3
-        uses: cachix/cachix-action@v7
+        uses: cachix/cachix-action@v8
         with:
-          name: toy-mirror-int
+          name: tal-mirror-int
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
       - name: Download Nix Dependenices
-        id: setup-4
         run: |
           nix-shell --pure shell.integration.nix
 
-  test:
-    name: Test
-    needs: setup
-    runs-on: ubuntu-18.04
-    if: "!contains(github.event.commits[0].message, '[skip ci]')"
-    steps:
-      - name: Checkout
-        id: test-1
-        uses: actions/checkout@v1
+      - name: Setup direnv
+        run: |
+          nix-shell --run "direnv allow" shell.integration.nix
 
-      - name: Install Nix
-        id: test-3
-        uses: cachix/install-nix-action@v12
-
-      - name: Cachix
-        id: test-4
-        uses: cachix/cachix-action@v6
-        with:
-          name: toy-mirror-int
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - name: Install Python build dependencies
+        run: |
+          nix-shell --run "direnv exec . pip install -r requirements.txt" shell.integration.nix
 
       - name: Run tests
-        id: test-5
         run: |
-          nix-shell --run "make test" shell.integration.nix
+          nix-shell --run "direnv exec . invoke test" shell.integration.nix
 
       - name: Upload coverage to Codecov
-        id: test-6
         uses: codecov/codecov-action@v1
         with:
           # TODO (sam): change after refactor
           fail_ci_if_error: false
 
       - name: Upload Test Artifacts
-        id: test-7
         uses: actions/upload-artifact@v2
         with:
           name: test
-          path: ./target/test/**/*
+          path: ./test/**/*

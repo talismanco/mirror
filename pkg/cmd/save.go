@@ -7,11 +7,11 @@ import (
 
 	cli "github.com/spf13/cobra"
 
-	"github.com/toyboxco/mirror/pkg/config"
-	"github.com/toyboxco/mirror/pkg/util/exec"
-	"github.com/toyboxco/mirror/pkg/util/exit"
-	"github.com/toyboxco/mirror/pkg/util/osutil"
-	"github.com/toyboxco/mirror/pkg/util/validate"
+	"github.com/talismanco/mirror/pkg/config"
+	"github.com/talismanco/mirror/pkg/util/exec"
+	"github.com/talismanco/mirror/pkg/util/exit"
+	"github.com/talismanco/mirror/pkg/util/osutil"
+	"github.com/talismanco/mirror/pkg/util/validate"
 )
 
 // Save contains the cli-command for saving templates to template registry.
