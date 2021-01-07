@@ -33,9 +33,7 @@ jobs:
     runs-on: ubuntu-18.04
     if: "!contains(github.event.commits[0].message, '[skip ci]')"
     outputs:
-      next-version:
-        description: Semantic version number for the next release
-        value: ${{ steps.next-version.outputs.next-version }}
+      next-version: ${{ steps.next-version.outputs.next-version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
