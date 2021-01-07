@@ -59,6 +59,7 @@ jobs:
         id: next-version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NEXT_VERSION: ${{ '$(nix-shell --run "npm run release:dry | grep -oP 'Published release \K.*? ' || echo '[no release]'" shell.release.nix)' }}
         run: |
           NEXT_VERSION=$(nix-shell --run "npm run release:dry | grep -oP 'Published release \K.*? ' || echo '[no release]'" shell.release.nix)
           echo "::set-output name=NEXT_VERSION::$NEXT_VERSION"
@@ -71,8 +72,10 @@ jobs:
     steps:
       - name: Checkout
         # uses: actions/checkout@v2
+        env:
+          OUTPUTS: ${{ toJson(needs.pre-build.outputs) }}
         run: |
-          echo ${{ fromJson(needs.pre-build.outputs) }}
+          echo $OUTPUTS
 
       - name: Install Nix
         uses: cachix/install-nix-action@v12
