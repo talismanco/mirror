@@ -1,0 +1,19 @@
+# See https://docs.docker.com/engine/reference/builder/#dockerignore-file for more about ignoring files.
+
+# config
+.env
+.env.*
+.*.env
+
+# dependencies
+node_modules
+vendor
+
+# build artifacts
+target
+
+# nix cache
+.direnv
+
+# IDE artifacts
+.idea

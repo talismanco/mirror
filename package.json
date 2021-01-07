@@ -1,0 +1,25 @@
+{
+  "name": "mirror",
+  "private": false,
+  "scripts": {
+    "release:ci": "semantic-release --ci",
+    "release:dry": "semantic-release --dry-run",
+    "update": "run-s \"update:*\"",
+    "update:upgrade": "ncu --upgrade",
+    "update:install": "npm install"
+  },
+  "devDependencies": {
+    "@google/semantic-release-replace-plugin": "^1.0.2",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "npm-check-updates": "^10.2.5",
+    "npm-run-all": "^4.1.5",
+    "semantic-release": "^17.3.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

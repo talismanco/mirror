@@ -1,0 +1,156 @@
+name: Release
+on:
+  push:
+    branches:
+      - master
+      - next
+      - alpha
+jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-18.04
+    if: "!contains(github.event.commits[0].message, '[skip ci]')"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v12
+
+      - name: Cachix
+        uses: cachix/cachix-action@v8
+        with:
+          name: tal-mirror-rel
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Download Nix Dependenices
+        run: |
+          nix-shell --pure shell.release.nix
+
+  pre-build:
+    name: Pre-build
+    needs: setup
+    runs-on: ubuntu-18.04
+    outputs:
+      next-version: ${{ steps.next-version.outputs.next-version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v12
+
+      - name: Cachix
+        uses: cachix/cachix-action@v8
+        with:
+          name: tal-mirror-rel
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Download Nix Dependenices
+        run: |
+          nix-shell --pure shell.release.nix
+
+      - name: Install Node.js dependencies
+        run: |
+          nix-shell --run "npm ci" shell.release.nix
+
+      - name: Get next release version
+        id: next-version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NEXT_VERSION=$(nix-shell --run "npm run release:dry | grep -oP 'Published release \K.*? ' || echo '[no release]'" shell.release.nix)
+          echo "::set-output name=next-version::$NEXT_VERSION"
+
+  build:
+    name: Build
+    needs: pre-build
+    runs-on: ubuntu-18.04
+    if: "needs.pre-build.outputs.next-version != '[no release]'"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v12
+
+      - name: Cachix
+        uses: cachix/cachix-action@v8
+        with:
+          name: tal-mirror-rel
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Download Nix Dependenices
+        run: |
+          nix-shell --pure shell.release.nix
+
+      - name: Setup direnv
+        run: |
+          nix-shell --run "direnv allow" shell.release.nix
+
+      - name: Install Python build dependencies
+        run: |
+          nix-shell --run "direnv exec . pip install -r requirements.txt" shell.release.nix
+
+      - name: Cross-compile build
+        run: |
+          nix-shell --run "direnv exec . invoke build.cross" shell.release.nix
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: ./build/dist/**/*
+
+  release:
+    name: Release
+    needs: build
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v12
+
+      - name: Cachix
+        uses: cachix/cachix-action@v8
+        with:
+          name: tal-mirror-rel
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: ./build/dist
+
+      - name: Install Node.js dependencies
+        run: |
+          nix-shell --run "npm ci" shell.release.nix
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          nix-shell --run "npm run release:ci" shell.release.nix
+
+  merge:
+    name: Merge
+    needs: release
+    runs-on: ubuntu-18.04
+    if: "contains(github.ref, 'master') || contains(github.ref, 'alpha') && always()"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: "Merge ${{ github.ref }} -> next"
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          target_branch: next
+          github_token: ${{ github.token }}

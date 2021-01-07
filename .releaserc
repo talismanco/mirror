@@ -1,0 +1,50 @@
+{
+  branches: [
+    "master", 
+    "next", 
+    {name: "alpha", prerelease: true}
+  ],
+  plugins: [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator", 
+    ["@semantic-release/changelog", {
+      "changelogFile": "CHANGELOG.md",
+    }],
+    ["@google/semantic-release-replace-plugin", {
+      "replacements": [
+        {
+          "files": ["config/settings/default.json"],
+          "from": "\"version\": \".*\"",
+          "to": "\"version\": \"${nextRelease.version}\"",
+          "countMatches": true
+        }
+      ]
+    }],
+    ["@semantic-release/git", {
+      "assets": [
+        "CHANGELOG.md",
+        "config/settings/default.json"
+      ],
+    }],
+    ["@semantic-release/github", {
+      "assets": [
+        {"path": "build/dist/darwin/386/mirror", name: "mirror.darwin-386", label: "Darwin (386)"},
+        {"path": "build/dist/darwin/amd64/mirror", name: "mirror.darwin-amd64", label: "Darwin (amd64)"},
+
+        {"path": "build/dist/freebsd/386/mirror", name: "mirror.freebsd-386", label: "FreeBSD (386)"},
+        {"path": "build/dist/freebsd/amd64/mirror", name: "mirror.freebsd-amd64", label: "FreeBSD (amd64)"},
+        {"path": "build/dist/freebsd/arm/mirror", name: "mirror.freebsd-arm", label: "FreeBSD (arm)"},
+
+        {"path": "build/dist/linux/386/mirror", name: "mirror.linux-386", label: "Linux (386)"},
+        {"path": "build/dist/linux/amd64/mirror", name: "mirror.linux-amd64", label: "Linux (amd64)"},
+        {"path": "build/dist/linux/arm/mirror", name: "mirror.linux-arm", label: "Linux (arm)"},
+
+        {"path": "build/dist/openbsd/386/mirror", name: "mirror.openbsd-386", label: "OpenBSD (386)"},
+        {"path": "build/dist/openbsd/amd64/mirror", name: "mirror.openbsd-amd64", label: "OpenBSD (amd64)"},
+
+        {"path": "build/dist/windows/386/mirror", name: "mirror.windows-386.exe", label: "Windows (386)"},
+        {"path": "build/dist/windows/amd64/mirror", name: "mirror.windows-amd64.exe", label: "Darwin (amd64)"},
+      ]
+    }]
+  ]
+}
