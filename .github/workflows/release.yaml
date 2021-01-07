@@ -61,9 +61,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           NEXT_VERSION=$(nix-shell --run "npm run release:dry | grep -oP 'Published release \K.*? ' || echo '[no release]'" shell.release.nix)
-          echo "$NEXT_VERSION"
-          echo "TEST"
-          nix-shell --run "npm run release:dry | grep -oP 'Published release \K.*? ' || echo '[no release]'" shell.release.nix
           echo "::set-output name=next-version::$NEXT_VERSION"
 
   build:
@@ -74,6 +71,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        run: |
+          echo ${{ needs.pre-build.outputs.next-version }}
 
       - name: Install Nix
         uses: cachix/install-nix-action@v12
