@@ -64,13 +64,13 @@ jobs:
           echo "$NEXT_VERSION"
           echo "TEST"
           nix-shell --run "npm run release:dry | grep -oP 'Published release \K.*? ' || echo '[no release]'" shell.release.nix
-          echo "::set-output name=NEXT_VERSION::$NEXT_VERSION"
+          echo "::set-output name=next-version::$NEXT_VERSION"
 
   build:
     name: Build
     needs: pre-build
     runs-on: ubuntu-18.04
-    if: "!contains(github.event.commits[0].message, '[skip ci]') && !contains(github.jobs.pre-build.steps.next-version.outputs.NEXT_VERSION, '[no release]')"
+    if: "!contains(github.event.commits[0].message, '[skip ci]') && !contains(github.jobs.pre-build.outputs.next-version, '[no release]')"
     steps:
       - name: Checkout
         uses: actions/checkout@v2
