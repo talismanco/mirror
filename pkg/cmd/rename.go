@@ -6,9 +6,9 @@ import (
 
 	cli "github.com/spf13/cobra"
 
-	"github.com/talismanco/mirror/pkg/config"
-	"github.com/talismanco/mirror/pkg/util/exit"
-	"github.com/talismanco/mirror/pkg/util/validate"
+	"github.com/toyboxco/mirror/pkg/config"
+	"github.com/toyboxco/mirror/pkg/util/exit"
+	"github.com/toyboxco/mirror/pkg/util/validate"
 )
 
 func renameTemplate(oldPath, newPath string) error {

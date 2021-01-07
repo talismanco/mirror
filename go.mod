@@ -1,4 +1,4 @@
-module github.com/talismanco/mirror
+module github.com/toyboxco/mirror
 
 go 1.14
 

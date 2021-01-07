@@ -4,11 +4,11 @@
 
 ### A command-line utility that creates projects from `mirrors` (project templates)
 
-[![Build Status](https://github.com/talismanco/mirror/workflows/CI/badge.svg)](https://github.com/talismanco/mirror/actions)
-[![Code Coverage](https://codecov.io/gh/talismanco/mirror/branch/master/graph/badge.svg)](https://codecov.io/gh/talismanco/mirror)
-[![Go Report Card](https://goreportcard.com/badge/talismanco/mirror)](https://goreportcard.com/report/talismanco/mirror)
-[![LICENSE](https://img.shields.io/github/license/talismanco/mirror.svg)](https://github.com/talismanco/mirror/blob/master/LICENSE)
-[![Releases](https://img.shields.io/github/release-pre/talismanco/mirror.svg)](https://github.com/talismanco/mirror/releases)
+[![Build Status](https://github.com/toyboxco/mirror/workflows/CI/badge.svg)](https://github.com/toyboxco/mirror/actions)
+[![Code Coverage](https://codecov.io/gh/toyboxco/mirror/branch/master/graph/badge.svg)](https://codecov.io/gh/toyboxco/mirror)
+[![Go Report Card](https://goreportcard.com/badge/toyboxco/mirror)](https://goreportcard.com/report/toyboxco/mirror)
+[![LICENSE](https://img.shields.io/github/license/toyboxco/mirror.svg)](https://github.com/toyboxco/mirror/blob/master/LICENSE)
+[![Releases](https://img.shields.io/github/release-pre/toyboxco/mirror.svg)](https://github.com/toyboxco/mirror/releases)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 </center>
@@ -34,18 +34,18 @@
 - **Full Power of [Golang Templates](https://golang.org/pkg/text/template/)** - Golang has powerful templating
   constructs which are very easy to learn and powerful.
 - **Dead-Simple Template Creation** - Creating boilerplate templates are very easy, check out
-  the [license template](https://github.com/talismanco/mirror-license) to see a simple, but very useful template for
+  the [license template](https://github.com/toyboxco/mirror-license) to see a simple, but very useful template for
   adding licenses to new projects with a single command.
 
 <!-- ----------------------------------------------------------------- -->
 
 # Installation
 
-> Our home management system, [Casa](https://github.com/talismanco/casa), is shipped with the most recent version of `Mirror` via [talismanpkgs](https://github.com/talismanco/talismanpkgs)
+> Our home management system, [Casa](https://github.com/toyboxco/casa), is shipped with the most recent version of `Mirror` via [toyboxpkgs](https://github.com/toyboxco/toyboxpkgs)
 
 Binaries for Windows, Mac, and Linux are officially supported. You can download them directly, from the release page, or run the installation script.
 
-Please see [Installation](https://github.com/talismanco/mirror/wiki/Installation) page for more information.
+Please see [Installation](https://github.com/toyboxco/mirror/wiki/Installation) page for more information.
 
 <!-- ----------------------------------------------------------------- -->
 
@@ -63,7 +63,7 @@ In order to download a mirror from a github repository, use the following comman
 
 ```bash
 mirror download <github-repo-path> <mirror-tag>
-mirror download talismanco/mirror-license license
+mirror download toyboxco/mirror-license license
 ```
 
 The downloaded template will be saved to local `mirror` registry.
@@ -105,7 +105,7 @@ When using the mirror with the following command:
 
 ```bash
 mirror use <mirror-tag> <target-dir>
-mirror use license /workspace/talismanco/example-project/
+mirror use license /workspace/toyboxco/example-project/
 ```
 
 The user will be prompted as follows:
@@ -118,14 +118,14 @@ The user will be prompted as follows:
     Select from 1..3 [default: 1]: 2
 [?] Please choose a value for "Year" [default: "2015"]:
 [?] Please choose a value for "Author" [default: "Tamer Tas"]:
-[✔] Created /workspace/talismanco/example-project/LICENSE
-[✔] Successfully executed the project license in /workspace/talismanco/example-project
+[✔] Created /workspace/toyboxco/example-project/LICENSE
+[✔] Successfully executed the project license in /workspace/toyboxco/example-project
 ```
 
-For more information please take a look at [Usage](https://github.com/talismanco/mirror/wiki/Usage) and [Creating Templates](https://github.com/talismanco/mirror/wiki/Creating-Templates) pages in the wiki.
+For more information please take a look at [Usage](https://github.com/toyboxco/mirror/wiki/Usage) and [Creating Templates](https://github.com/toyboxco/mirror/wiki/Creating-Templates) pages in the wiki.
 
 <!-------------------------------------------------------------------->
 
 ## List of Templates
 
-Take a look at the [Templates](https://github.com/talismanco/mirror/wiki/Templates) page for an index of project templates, examples, and more information.
+Take a look at the [Templates](https://github.com/toyboxco/mirror/wiki/Templates) page for an index of project templates, examples, and more information.

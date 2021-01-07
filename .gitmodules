@@ -1,3 +1,3 @@
 [submodule "wiki"]
 	path = wiki
-	url = git@github.com:talismanco/mirror.wiki.git
+	url = git@github.com:toyboxco/mirror.wiki.git

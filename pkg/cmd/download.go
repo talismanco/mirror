@@ -6,12 +6,12 @@ import (
 
 	cli "github.com/spf13/cobra"
 
-	"github.com/talismanco/mirror/pkg/config"
-	"github.com/talismanco/mirror/pkg/host"
-	"github.com/talismanco/mirror/pkg/util/exit"
-	"github.com/talismanco/mirror/pkg/util/git"
-	"github.com/talismanco/mirror/pkg/util/osutil"
-	"github.com/talismanco/mirror/pkg/util/validate"
+	"github.com/toyboxco/mirror/pkg/config"
+	"github.com/toyboxco/mirror/pkg/host"
+	"github.com/toyboxco/mirror/pkg/util/exit"
+	"github.com/toyboxco/mirror/pkg/util/git"
+	"github.com/toyboxco/mirror/pkg/util/osutil"
+	"github.com/toyboxco/mirror/pkg/util/validate"
 )
 
 // Download contains the cli-command for downloading templates from github.

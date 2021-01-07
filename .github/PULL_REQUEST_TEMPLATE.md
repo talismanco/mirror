@@ -2,9 +2,8 @@
 
 Please check if your PR fulfills the following requirements:
 - [ ] Tests for the changes have been added (for bug fixes / features)
-- [ ] New tests (if any) pass successfully via `invoke test` (for bug fixes / features)
 - [ ] Docs have been reviewed and added / updated if needed (for bug fixes / features)
-- [ ] Build (`invoke build.cross` or `invoke build.cross --docker`) was run locally and any changes were pushed
+- [ ] Build (`make build-cross` or `make docker-build-cross`) was run locally and any changes were pushed
 
 
 ## Pull request type

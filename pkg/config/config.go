@@ -7,8 +7,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/talismanco/mirror/pkg/util/exit"
-	"github.com/talismanco/mirror/pkg/util/osutil"
+	"github.com/toyboxco/mirror/pkg/util/exit"
+	"github.com/toyboxco/mirror/pkg/util/osutil"
 )
 
 const (

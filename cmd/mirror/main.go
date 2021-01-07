@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	cmd "github.com/talismanco/mirror/pkg/cmd"
-	config "github.com/talismanco/mirror/pkg/config"
-	exit "github.com/talismanco/mirror/pkg/util/exit"
-	osutil "github.com/talismanco/mirror/pkg/util/osutil"
+	cmd "github.com/toyboxco/mirror/pkg/cmd"
+	config "github.com/toyboxco/mirror/pkg/config"
+	exit "github.com/toyboxco/mirror/pkg/util/exit"
+	osutil "github.com/toyboxco/mirror/pkg/util/osutil"
 
 	log "github.com/sirupsen/logrus"
 )

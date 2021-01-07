@@ -1,3 +1,3 @@
 *.json
-!default.json
+!global.json
 !development.json

@@ -9,11 +9,11 @@ import (
 	"regexp"
 	"text/template"
 
-	"github.com/talismanco/mirror/pkg/config"
-	"github.com/talismanco/mirror/pkg/prompt"
-	"github.com/talismanco/mirror/pkg/util/osutil"
-	"github.com/talismanco/mirror/pkg/util/stringutil"
-	"github.com/talismanco/mirror/pkg/util/tlog"
+	"github.com/toyboxco/mirror/pkg/config"
+	"github.com/toyboxco/mirror/pkg/prompt"
+	"github.com/toyboxco/mirror/pkg/util/osutil"
+	"github.com/toyboxco/mirror/pkg/util/stringutil"
+	"github.com/toyboxco/mirror/pkg/util/tlog"
 )
 
 // Interface is contains the behavior of mirror templates.

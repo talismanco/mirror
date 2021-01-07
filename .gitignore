@@ -10,10 +10,7 @@ node_modules
 vendor
 
 # build artifacts
-build/bin/*
-build/dist/*
-__pycache__/
-*.py[cod]
+target
 
 # nix cache
 .direnv
