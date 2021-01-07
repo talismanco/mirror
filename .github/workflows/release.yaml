@@ -72,7 +72,7 @@ jobs:
       - name: Checkout
         # uses: actions/checkout@v2
         run: |
-          echo ${{ needs.pre-build.outputs.NEXT_VERSION }}
+          echo ${{ needs.pre-build.outputs }}
 
       - name: Install Nix
         uses: cachix/install-nix-action@v12
