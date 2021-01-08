@@ -131,11 +131,11 @@ def build_cross(context, docker=False, static="static"):
     for system, arch in cctargets:
         # Establish the output directory for the current
         # build target.
-        targetdir = f'./{system}/{arch}'
+        targetdir = f'./build/dist/{system}/{arch}'
 
         # Create the `targetdir` if it doesn't exist.
         pathlib.Path(targetdir).mkdir(parents=True, exist_ok=True)
-
+        
         if docker:
             # Execute the `./docker/build.dockerfile` and pass
             # necessary build arguments.
