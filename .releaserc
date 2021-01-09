@@ -45,6 +45,9 @@
         {"path": "build/dist/windows/386/mirror", name: "mirror.windows-386.exe", label: "Windows (386)"},
         {"path": "build/dist/windows/amd64/mirror", name: "mirror.windows-amd64.exe", label: "Darwin (amd64)"},
       ]
+    }],
+    ["@semantic-release/exec", {
+      "prepareCmd": "./scripts/shell/pre-build.sh ${nextRelease.version}"
     }]
   ]
 }

@@ -11,6 +11,7 @@
   "devDependencies": {
     "@google/semantic-release-replace-plugin": "^1.0.2",
     "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/exec": "^5.0.0",
     "@semantic-release/git": "^9.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "npm-check-updates": "^10.2.5",
