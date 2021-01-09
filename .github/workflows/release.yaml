@@ -62,8 +62,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           nix-shell --run "npm run release:dry"
-          # NEXT_VERSION=$(nix-shell --run "npm run release:dry | grep -oP 'Published release \K.*? ' || echo '[no release]'" shell.release.nix)
-          # echo "::set-output name=next-version::$NEXT_VERSION"
+
+      - run: |
+          echo ${{ steps.next-version.outputs.next-version }}
           exit 1
 
   build:
